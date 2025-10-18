@@ -135,9 +135,10 @@ python main.py
 
 The project documentation is generated using Doxygen.
 
-- **Web version:** 
-Can view index.html present inside docs/html - Python_spo_framework
-Can view index.html present inside docs/html - Python_term_sheet
+**Web version:**
+1. Can view `index.html` present inside `docs/html - Python_spo_framework`
+2. Can view `index.html` present inside `docs/html - Python_term_sheet`
+
   
 - **To regenerate documentation locally:**  
   1. Make sure Doxygen is installed.  
