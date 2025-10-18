@@ -136,7 +136,8 @@ python main.py
 The project documentation is generated using Doxygen.
 
 - **Web version:** 
-[Frameworks and SPOs](https://candybutcher27.github.io/SFI-Data-Project/)(Hosted via Github Pages)
+Can view index.html present inside docs/html - Python_spo_framework
+Can view index.html present inside docs/html - Python_term_sheet
   
 - **To regenerate documentation locally:**  
   1. Make sure Doxygen is installed.  
