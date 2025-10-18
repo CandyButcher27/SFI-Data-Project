@@ -60,3 +60,8 @@ build/
 *.whl
 pip-wheel-metadata/
 __pypackages__/
+
+# -----------------------------
+# Latex Files
+# -----------------------------
+docs/latex

@@ -1,0 +1,70 @@
+\doxysection{table\+\_\+parser Namespace Reference}
+\hypertarget{namespacetable__parser}{}\label{namespacetable__parser}\index{table\_parser@{table\_parser}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{namespacetable__parser_afc997e3fbd7c1656f1c0f59e3af5c50f}{parser\+\_\+for\+\_\+table}} (str extracted\+\_\+text, str prompt\+\_\+json\+\_\+path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetable__parser_a2497a363e65cb562cf5cfee7d801fa49}{LLM\+\_\+\+API\+\_\+\+KEY}} = os.\+getenv("{}GROQ\+\_\+\+API\+\_\+\+KEY"{})
+\item 
+\mbox{\hyperlink{namespacetable__parser_ab32ab124729da393e352021c7c787521}{MODEL\+\_\+\+NAME}} = GROQ\+\_\+\+MODEL
+\item 
+\mbox{\hyperlink{namespacetable__parser_a424e3f495ef6072cbb0e3f88d2eaaf2f}{PROMPT\+\_\+\+JSON\+\_\+\+PATH}} = PROMPTS\+\_\+\+TABLE
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}table_parser.py
+
+Parses extracted table text per company using a Large Language Model (LLM):
+- Reads extracted text from memory or cached text files
+- Loads instructions and JSON schema from Prompts/prompts_table.json
+- Sends extracted text + instructions to the LLM
+- Returns structured output as a Python dictionary, ensuring valid JSON even if LLM output is messy
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetable__parser_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetable__parser_afc997e3fbd7c1656f1c0f59e3af5c50f}\index{table\_parser@{table\_parser}!parser\_for\_table@{parser\_for\_table}}
+\index{parser\_for\_table@{parser\_for\_table}!table\_parser@{table\_parser}}
+\doxysubsubsection{\texorpdfstring{parser\_for\_table()}{parser\_for\_table()}}
+{\footnotesize\ttfamily \label{namespacetable__parser_afc997e3fbd7c1656f1c0f59e3af5c50f} 
+ dict table\+\_\+parser.\+parser\+\_\+for\+\_\+table (\begin{DoxyParamCaption}\item[{str}]{extracted\+\_\+text}{, }\item[{str}]{prompt\+\_\+json\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Use LLM to extract structured info from extracted text according to the prompt JSON.
+Returns a Python dictionary, ensuring valid JSON even if the LLM output is messy.
+
+:param extracted_text: str, text extracted from table PDFs for a company
+:param prompt_json_path: path to the JSON file containing task_description and output_json_structure
+:param client: LLM client object
+:param model_name: model name for the LLM
+:return: dict, parsed JSON (fallback to {"_raw": <LLM output>} if parsing fails)
+\end{DoxyVerb}
+ 
+
+\label{doc-var-members}
+\Hypertarget{namespacetable__parser_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacetable__parser_a2497a363e65cb562cf5cfee7d801fa49}\index{table\_parser@{table\_parser}!LLM\_API\_KEY@{LLM\_API\_KEY}}
+\index{LLM\_API\_KEY@{LLM\_API\_KEY}!table\_parser@{table\_parser}}
+\doxysubsubsection{\texorpdfstring{LLM\_API\_KEY}{LLM\_API\_KEY}}
+{\footnotesize\ttfamily \label{namespacetable__parser_a2497a363e65cb562cf5cfee7d801fa49} 
+table\+\_\+parser.\+LLM\+\_\+\+API\+\_\+\+KEY = os.\+getenv("{}GROQ\+\_\+\+API\+\_\+\+KEY"{})}
+
+\Hypertarget{namespacetable__parser_ab32ab124729da393e352021c7c787521}\index{table\_parser@{table\_parser}!MODEL\_NAME@{MODEL\_NAME}}
+\index{MODEL\_NAME@{MODEL\_NAME}!table\_parser@{table\_parser}}
+\doxysubsubsection{\texorpdfstring{MODEL\_NAME}{MODEL\_NAME}}
+{\footnotesize\ttfamily \label{namespacetable__parser_ab32ab124729da393e352021c7c787521} 
+table\+\_\+parser.\+MODEL\+\_\+\+NAME = GROQ\+\_\+\+MODEL}
+
+\Hypertarget{namespacetable__parser_a424e3f495ef6072cbb0e3f88d2eaaf2f}\index{table\_parser@{table\_parser}!PROMPT\_JSON\_PATH@{PROMPT\_JSON\_PATH}}
+\index{PROMPT\_JSON\_PATH@{PROMPT\_JSON\_PATH}!table\_parser@{table\_parser}}
+\doxysubsubsection{\texorpdfstring{PROMPT\_JSON\_PATH}{PROMPT\_JSON\_PATH}}
+{\footnotesize\ttfamily \label{namespacetable__parser_a424e3f495ef6072cbb0e3f88d2eaaf2f} 
+table\+\_\+parser.\+PROMPT\+\_\+\+JSON\+\_\+\+PATH = PROMPTS\+\_\+\+TABLE}
+

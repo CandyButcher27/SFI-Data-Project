@@ -1,0 +1,73 @@
+\doxysection{writer Namespace Reference}
+\hypertarget{namespacewriter}{}\label{namespacewriter}\index{writer@{writer}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+str \mbox{\hyperlink{namespacewriter_a63b5e9802cc183cf81e3a10ff173b5c5}{\+\_\+get\+\_\+next\+\_\+framework\+\_\+id}} (ws)
+\item 
+Workbook \mbox{\hyperlink{namespacewriter_a2000d94642c948534d270a83e77c4cba}{\+\_\+init\+\_\+workbook}} ()
+\item 
+None \mbox{\hyperlink{namespacewriter_a98ee55182763461aaec8b71d8a4102e0}{write\+\_\+to\+\_\+excel}} (Dict json\+\_\+data, str run\+\_\+for)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}writer.py
+
+Handles writing structured framework and SPO data into an Excel workbook.
+- Initializes workbook with required sheets if missing.
+- Generates unique Framework IDs.
+- Supports writing both 'framework' and 'spo' JSON data.
+- Updates relevant sheets including:
+  * Framework Overview
+  * Governance
+  * SPO Summary
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacewriter_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacewriter_a63b5e9802cc183cf81e3a10ff173b5c5}\index{writer@{writer}!\_get\_next\_framework\_id@{\_get\_next\_framework\_id}}
+\index{\_get\_next\_framework\_id@{\_get\_next\_framework\_id}!writer@{writer}}
+\doxysubsubsection{\texorpdfstring{\_get\_next\_framework\_id()}{\_get\_next\_framework\_id()}}
+{\footnotesize\ttfamily \label{namespacewriter_a63b5e9802cc183cf81e3a10ff173b5c5} 
+ str writer.\+\_\+get\+\_\+next\+\_\+framework\+\_\+id (\begin{DoxyParamCaption}\item[{}]{ws}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Generate the next Framework ID in sequence (F001, F002, ...).
+
+Args:
+    ws (openpyxl.worksheet.worksheet.Worksheet): Worksheet containing existing frameworks.
+
+Returns:
+    str: Next Framework ID.
+\end{DoxyVerb}
+ \Hypertarget{namespacewriter_a2000d94642c948534d270a83e77c4cba}\index{writer@{writer}!\_init\_workbook@{\_init\_workbook}}
+\index{\_init\_workbook@{\_init\_workbook}!writer@{writer}}
+\doxysubsubsection{\texorpdfstring{\_init\_workbook()}{\_init\_workbook()}}
+{\footnotesize\ttfamily \label{namespacewriter_a2000d94642c948534d270a83e77c4cba} 
+ Workbook writer.\+\_\+init\+\_\+workbook (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Initialize the Excel workbook if it does not exist, creating required sheets.
+
+Returns:
+    openpyxl.workbook.workbook.Workbook: The loaded or newly created workbook.
+\end{DoxyVerb}
+ \Hypertarget{namespacewriter_a98ee55182763461aaec8b71d8a4102e0}\index{writer@{writer}!write\_to\_excel@{write\_to\_excel}}
+\index{write\_to\_excel@{write\_to\_excel}!writer@{writer}}
+\doxysubsubsection{\texorpdfstring{write\_to\_excel()}{write\_to\_excel()}}
+{\footnotesize\ttfamily \label{namespacewriter_a98ee55182763461aaec8b71d8a4102e0} 
+ None writer.\+write\+\_\+to\+\_\+excel (\begin{DoxyParamCaption}\item[{Dict}]{json\+\_\+data}{, }\item[{str}]{run\+\_\+for}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Write extracted JSON data into the Excel workbook.
+
+Args:
+    json_data (dict): Structured data for a framework or SPO.
+    run_for (str): Either 'framework' or 'spo' to indicate type of data.
+
+Behavior:
+    - For 'framework': generates a new Framework ID, writes Framework Overview and Governance.
+    - For 'spo': updates last framework row, writes SPO Summary.
+    - Saves workbook after writing.
+\end{DoxyVerb}
+ 

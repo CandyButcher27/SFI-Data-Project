@@ -1,0 +1,82 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Namespace Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Namespace List}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}File Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}File List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Namespace Documentation}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}config Namespace Reference}{5}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Detailed Description}{5}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Variable Documentation}{5}{subsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.1}CHUNK\_SIZE}{5}{subsubsection.3.1.2.1}%
+\contentsline {subsubsection}{\numberline {3.1.2.2}EXCEL\_FILE}{5}{subsubsection.3.1.2.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.3}GEMINI\_MODEL}{6}{subsubsection.3.1.2.3}%
+\contentsline {subsubsection}{\numberline {3.1.2.4}GROQ\_MODEL}{6}{subsubsection.3.1.2.4}%
+\contentsline {subsubsection}{\numberline {3.1.2.5}MAIN\_FOLDER}{6}{subsubsection.3.1.2.5}%
+\contentsline {subsubsection}{\numberline {3.1.2.6}OVERLAP}{6}{subsubsection.3.1.2.6}%
+\contentsline {subsubsection}{\numberline {3.1.2.7}PROMPTS\_FILE}{6}{subsubsection.3.1.2.7}%
+\contentsline {subsubsection}{\numberline {3.1.2.8}PROMPTS\_TABLE}{6}{subsubsection.3.1.2.8}%
+\contentsline {subsubsection}{\numberline {3.1.2.9}TOP\_K}{6}{subsubsection.3.1.2.9}%
+\contentsline {subsubsection}{\numberline {3.1.2.10}WHISPERER\_BASE}{6}{subsubsection.3.1.2.10}%
+\contentsline {section}{\numberline {3.2}extractor Namespace Reference}{6}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Detailed Description}{7}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Function Documentation}{7}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}chunk\_text()}{7}{subsubsection.3.2.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}extract\_chunks\_from\_two\_pdfs()}{7}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}extract\_text\_from\_pdf()}{8}{subsubsection.3.2.2.3}%
+\contentsline {section}{\numberline {3.3}main Namespace Reference}{8}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Detailed Description}{8}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Function Documentation}{8}{subsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}find\_pdf\_pair()}{8}{subsubsection.3.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.3.2.2}main()}{9}{subsubsection.3.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.3}main\_table()}{9}{subsubsection.3.3.2.3}%
+\contentsline {section}{\numberline {3.4}parser Namespace Reference}{9}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Detailed Description}{10}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Function Documentation}{10}{subsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.1}assemble\_context()}{10}{subsubsection.3.4.2.1}%
+\contentsline {subsubsection}{\numberline {3.4.2.2}build\_tfidf\_index()}{10}{subsubsection.3.4.2.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.3}call\_gemini()}{10}{subsubsection.3.4.2.3}%
+\contentsline {subsubsection}{\numberline {3.4.2.4}call\_groq()}{11}{subsubsection.3.4.2.4}%
+\contentsline {subsubsection}{\numberline {3.4.2.5}parse\_with\_llm()}{11}{subsubsection.3.4.2.5}%
+\contentsline {subsubsection}{\numberline {3.4.2.6}parse\_with\_llm\_gemini()}{11}{subsubsection.3.4.2.6}%
+\contentsline {subsubsection}{\numberline {3.4.2.7}retrieve\_top\_k()}{11}{subsubsection.3.4.2.7}%
+\contentsline {section}{\numberline {3.5}table\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}extractor Namespace Reference}{12}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Detailed Description}{12}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Function Documentation}{12}{subsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.1}assemble\_pages\_with\_pypdf()}{12}{subsubsection.3.5.2.1}%
+\contentsline {subsubsection}{\numberline {3.5.2.2}call\_whisperer\_and\_get\_text()}{13}{subsubsection.3.5.2.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.3}create\_label\_page\_bytes()}{13}{subsubsection.3.5.2.3}%
+\contentsline {subsubsection}{\numberline {3.5.2.4}find\_framework\_and\_spo\_pdfs()}{13}{subsubsection.3.5.2.4}%
+\contentsline {subsubsection}{\numberline {3.5.2.5}get\_pages\_with\_tables\_pdfplumber()}{13}{subsubsection.3.5.2.5}%
+\contentsline {subsubsection}{\numberline {3.5.2.6}process\_subfolders\_in\_memory()}{14}{subsubsection.3.5.2.6}%
+\contentsline {subsubsection}{\numberline {3.5.2.7}write\_temp\_merged\_pdf()}{14}{subsubsection.3.5.2.7}%
+\contentsline {subsection}{\numberline {3.5.3}Variable Documentation}{14}{subsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.3.1}ROOT\_FOLDER}{14}{subsubsection.3.5.3.1}%
+\contentsline {subsubsection}{\numberline {3.5.3.2}WHISPERER\_API\_KEY}{14}{subsubsection.3.5.3.2}%
+\contentsline {subsubsection}{\numberline {3.5.3.3}WHISPERER\_BASE}{14}{subsubsection.3.5.3.3}%
+\contentsline {section}{\numberline {3.6}table\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}parser Namespace Reference}{15}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Detailed Description}{15}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Function Documentation}{15}{subsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.2.1}parser\_for\_table()}{15}{subsubsection.3.6.2.1}%
+\contentsline {subsection}{\numberline {3.6.3}Variable Documentation}{15}{subsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.3.1}LLM\_API\_KEY}{15}{subsubsection.3.6.3.1}%
+\contentsline {subsubsection}{\numberline {3.6.3.2}MODEL\_NAME}{15}{subsubsection.3.6.3.2}%
+\contentsline {subsubsection}{\numberline {3.6.3.3}PROMPT\_JSON\_PATH}{16}{subsubsection.3.6.3.3}%
+\contentsline {section}{\numberline {3.7}table\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}writer Namespace Reference}{16}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Detailed Description}{16}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Function Documentation}{16}{subsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.2.1}writer\_to\_excel\_table()}{16}{subsubsection.3.7.2.1}%
+\contentsline {section}{\numberline {3.8}writer Namespace Reference}{16}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Detailed Description}{17}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.8.2}Function Documentation}{17}{subsection.3.8.2}%
+\contentsline {subsubsection}{\numberline {3.8.2.1}\_get\_next\_framework\_id()}{17}{subsubsection.3.8.2.1}%
+\contentsline {subsubsection}{\numberline {3.8.2.2}\_init\_workbook()}{17}{subsubsection.3.8.2.2}%
+\contentsline {subsubsection}{\numberline {3.8.2.3}write\_to\_excel()}{17}{subsubsection.3.8.2.3}%
+\contentsline {chapter}{\numberline {4}File Documentation}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}config.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{19}{section.4.1}%
+\contentsline {section}{\numberline {4.2}extractor.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{19}{section.4.2}%
+\contentsline {section}{\numberline {4.3}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{20}{section.4.3}%
+\contentsline {section}{\numberline {4.4}parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{20}{section.4.4}%
+\contentsline {section}{\numberline {4.5}table\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}extractor.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{20}{section.4.5}%
+\contentsline {section}{\numberline {4.6}table\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{21}{section.4.6}%
+\contentsline {section}{\numberline {4.7}table\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}writer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{21}{section.4.7}%
+\contentsline {section}{\numberline {4.8}writer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{21}{section.4.8}%

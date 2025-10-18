@@ -1,0 +1,93 @@
+\doxysection{extractor Namespace Reference}
+\hypertarget{namespaceextractor}{}\label{namespaceextractor}\index{extractor@{extractor}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{namespaceextractor_a33ac0ea371d39344eecf95315392037d}{extract\+\_\+text\+\_\+from\+\_\+pdf}} (str path)
+\item 
+List\mbox{[}str\mbox{]} \mbox{\hyperlink{namespaceextractor_aae04a5ebf2a58e2286d3eaaa15c6d54a}{chunk\+\_\+text}} (str text, int chunk\+\_\+size=2000, int overlap=200)
+\item 
+List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{namespaceextractor_a23c67034b41cc83151dfa5fb1f29c82f}{extract\+\_\+chunks\+\_\+from\+\_\+two\+\_\+pdfs}} (str framework\+\_\+pdf, str spo\+\_\+pdf, int chunk\+\_\+size=500, int overlap=200, str folder\+\_\+name=None)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}extractor.py
+
+This module provides utilities to extract and chunk textual data from PDF files,
+specifically designed for SPO and Framework PDFs in the SPO-Framework-Extractor pipeline.
+
+Functions:
+- extract_text_from_pdf(pdf_path: str) -> List[str]
+    Extracts raw text from each page of a PDF and returns a list of page texts.
+
+- chunk_text(text: str, chunk_size: int = 2000, overlap: int = 200) -> List[str]
+    Splits a single string into overlapping text chunks of specified size.
+
+- extract_chunks_from_two_pdfs(framework_pdf: str, spo_pdf: str, chunk_size: int = 500, 
+                               overlap: int = 200, folder_name: str = None) -> List[Dict]
+    Extracts and chunks text from two PDFs (framework and SPO) and returns a list
+    of dictionaries containing chunk data, source, page number, chunk index, and folder.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespaceextractor_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceextractor_aae04a5ebf2a58e2286d3eaaa15c6d54a}\index{extractor@{extractor}!chunk\_text@{chunk\_text}}
+\index{chunk\_text@{chunk\_text}!extractor@{extractor}}
+\doxysubsubsection{\texorpdfstring{chunk\_text()}{chunk\_text()}}
+{\footnotesize\ttfamily \label{namespaceextractor_aae04a5ebf2a58e2286d3eaaa15c6d54a} 
+ List\mbox{[}str\mbox{]} extractor.\+chunk\+\_\+text (\begin{DoxyParamCaption}\item[{str}]{text}{, }\item[{int }]{chunk\+\_\+size}{ = {\ttfamily 2000}, }\item[{int }]{overlap}{ = {\ttfamily 200}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Split a string into overlapping text chunks.
+
+Args:
+    text (str): Input text to be chunked.
+    chunk_size (int): Maximum number of characters per chunk. Default is 2000.
+    overlap (int): Number of characters to overlap between consecutive chunks. Default is 200.
+
+Returns:
+    List[str]: List of text chunks. Returns an empty list if text is empty.
+\end{DoxyVerb}
+ \Hypertarget{namespaceextractor_a23c67034b41cc83151dfa5fb1f29c82f}\index{extractor@{extractor}!extract\_chunks\_from\_two\_pdfs@{extract\_chunks\_from\_two\_pdfs}}
+\index{extract\_chunks\_from\_two\_pdfs@{extract\_chunks\_from\_two\_pdfs}!extractor@{extractor}}
+\doxysubsubsection{\texorpdfstring{extract\_chunks\_from\_two\_pdfs()}{extract\_chunks\_from\_two\_pdfs()}}
+{\footnotesize\ttfamily \label{namespaceextractor_a23c67034b41cc83151dfa5fb1f29c82f} 
+ List\mbox{[}Dict\mbox{]} extractor.\+extract\+\_\+chunks\+\_\+from\+\_\+two\+\_\+pdfs (\begin{DoxyParamCaption}\item[{str}]{framework\+\_\+pdf}{, }\item[{str}]{spo\+\_\+pdf}{, }\item[{int }]{chunk\+\_\+size}{ = {\ttfamily 500}, }\item[{int }]{overlap}{ = {\ttfamily 200}, }\item[{str }]{folder\+\_\+name}{ = {\ttfamily None}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Extract text from two PDFs (framework and SPO), chunk each page, and return structured chunks.
+
+Args:
+    framework_pdf (str): Path to the framework PDF.
+    spo_pdf (str): Path to the SPO PDF.
+    chunk_size (int): Maximum characters per chunk. Default is 500.
+    overlap (int): Number of overlapping characters between chunks. Default is 200.
+    folder_name (str, optional): Name of the folder/company associated with these PDFs.
+
+Returns:
+    List[Dict]: A list of dictionaries, each representing a chunk:
+        {
+            "chunk": str,          # Chunk text
+            "source": str,         # "framework" or "spo"
+            "page": int,           # Page number (1-indexed)
+            "chunk_index": int,    # Index of chunk on this page (1-indexed)
+            "folder": str or None  # Folder/company name
+        }
+\end{DoxyVerb}
+ \Hypertarget{namespaceextractor_a33ac0ea371d39344eecf95315392037d}\index{extractor@{extractor}!extract\_text\_from\_pdf@{extract\_text\_from\_pdf}}
+\index{extract\_text\_from\_pdf@{extract\_text\_from\_pdf}!extractor@{extractor}}
+\doxysubsubsection{\texorpdfstring{extract\_text\_from\_pdf()}{extract\_text\_from\_pdf()}}
+{\footnotesize\ttfamily \label{namespaceextractor_a33ac0ea371d39344eecf95315392037d} 
+ List\mbox{[}str\mbox{]} extractor.\+extract\+\_\+text\+\_\+from\+\_\+pdf (\begin{DoxyParamCaption}\item[{str}]{path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Extract text from a PDF file.
+
+Args:
+    path (str): Path to the PDF file.
+
+Returns:
+    List[str]: List of strings, one per page. Index 0 corresponds to page 1.
+               If a page has no text, returns an empty string for that page.
+\end{DoxyVerb}
+ 

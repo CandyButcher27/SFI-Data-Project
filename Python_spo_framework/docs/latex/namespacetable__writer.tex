@@ -1,0 +1,42 @@
+\doxysection{table\+\_\+writer Namespace Reference}
+\hypertarget{namespacetable__writer}{}\label{namespacetable__writer}\index{table\_writer@{table\_writer}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetable__writer_a3f1e6bbbe29454b499d7deb2c000b909}{writer\+\_\+to\+\_\+excel\+\_\+table}} (dict answer, str EXCEL\+\_\+\+FILE)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}table_writer.py
+
+Writes structured table extraction results from JSON into an Excel file.
+- Creates or ensures existence of two sheets:
+  1. 'Eligibility+EU Tax' — detailed criteria per Use of Proceeds
+  2. 'SDG' — summary of SDGs per Use of Proceeds
+- Handles appending to existing sheets safely, avoiding overwrite issues.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetable__writer_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetable__writer_a3f1e6bbbe29454b499d7deb2c000b909}\index{table\_writer@{table\_writer}!writer\_to\_excel\_table@{writer\_to\_excel\_table}}
+\index{writer\_to\_excel\_table@{writer\_to\_excel\_table}!table\_writer@{table\_writer}}
+\doxysubsubsection{\texorpdfstring{writer\_to\_excel\_table()}{writer\_to\_excel\_table()}}
+{\footnotesize\ttfamily \label{namespacetable__writer_a3f1e6bbbe29454b499d7deb2c000b909} 
+table\+\_\+writer.\+writer\+\_\+to\+\_\+excel\+\_\+table (\begin{DoxyParamCaption}\item[{dict}]{answer}{, }\item[{str}]{EXCEL\+\_\+\+FILE}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Writes structured data from a parsed JSON (`answer`) into an Excel file.
+
+Args:
+    answer (dict): JSON output containing 'Use_of_Proceeds', SDGs, and Eligibility Criteria.
+    EXCEL_FILE (str): Path to the Excel file where data should be written.
+
+Behavior:
+    - Creates the Excel file if it does not exist.
+    - Ensures sheets 'Eligibility+EU Tax' and 'SDG' exist.
+    - Appends new data to the sheets without overwriting existing rows.
+    - Automatically generates a new Framework ID (F001, F002, ...).
+\end{DoxyVerb}
+ 
