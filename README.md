@@ -129,4 +129,26 @@ cd Python_term_sheet
 python main.py
 ```
 
-## Output :  Excel sheets containing structured textual and tabular data.
+### Output :  Excel sheets containing structured textual and tabular data.
+
+### Documentation
+
+The project documentation is generated using Doxygen.
+
+- **Web version:** 
+[Project Documentation](https://<username>.github.io/<repo-name>/)(Frameworks and SPOs - Hosted via Github Pages)
+  
+- **To regenerate documentation locally:**  
+  1. Make sure Doxygen is installed.  
+  2. Navigate to the project folder in terminal:
+     ```bash
+     cd Python_spo_framework
+     ```
+  3. Run:
+     ```bash
+     doxygen Doxyfile
+     ```
+- **Notes:**  
+  - Only `docs/html` is needed for the web version.  
+  - The LaTeX/PDF output (`docs/latex`) is one-time and ignored in Git.
+
