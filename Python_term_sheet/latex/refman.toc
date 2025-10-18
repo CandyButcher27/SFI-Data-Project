@@ -1,0 +1,47 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Namespace Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Namespace List}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}File Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}File List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Namespace Documentation}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}config Namespace Reference}{5}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Variable Documentation}{5}{subsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}CHUNK\_SIZE}{5}{subsubsection.3.1.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.2}EXCEL\_FILE}{5}{subsubsection.3.1.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.1.3}GEMINI\_MODEL}{5}{subsubsection.3.1.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.1.4}GROQ\_MODEL}{5}{subsubsection.3.1.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.1.5}MAIN\_FOLDER}{6}{subsubsection.3.1.1.5}%
+\contentsline {subsubsection}{\numberline {3.1.1.6}OVERLAP}{6}{subsubsection.3.1.1.6}%
+\contentsline {subsubsection}{\numberline {3.1.1.7}PROMPTS\_FILE}{6}{subsubsection.3.1.1.7}%
+\contentsline {subsubsection}{\numberline {3.1.1.8}TOP\_K}{6}{subsubsection.3.1.1.8}%
+\contentsline {section}{\numberline {3.2}extractor Namespace Reference}{6}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Detailed Description}{6}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Function Documentation}{6}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}chunk\_text()}{6}{subsubsection.3.2.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2.2}extract\_chunks\_from\_termsheet()}{7}{subsubsection.3.2.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.3}extract\_text\_from\_pdf()}{7}{subsubsection.3.2.2.3}%
+\contentsline {section}{\numberline {3.3}main Namespace Reference}{7}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Detailed Description}{7}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Function Documentation}{7}{subsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}find\_all\_pdfs()}{7}{subsubsection.3.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.3.2.2}main()}{7}{subsubsection.3.3.2.2}%
+\contentsline {section}{\numberline {3.4}parser Namespace Reference}{8}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Detailed Description}{8}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Function Documentation}{8}{subsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.1}assemble\_context()}{8}{subsubsection.3.4.2.1}%
+\contentsline {subsubsection}{\numberline {3.4.2.2}build\_tfidf\_index()}{8}{subsubsection.3.4.2.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.3}call\_gemini()}{8}{subsubsection.3.4.2.3}%
+\contentsline {subsubsection}{\numberline {3.4.2.4}call\_groq()}{9}{subsubsection.3.4.2.4}%
+\contentsline {subsubsection}{\numberline {3.4.2.5}parse\_with\_llm()}{9}{subsubsection.3.4.2.5}%
+\contentsline {subsubsection}{\numberline {3.4.2.6}parse\_with\_llm\_gemini()}{9}{subsubsection.3.4.2.6}%
+\contentsline {subsubsection}{\numberline {3.4.2.7}retrieve\_top\_k()}{9}{subsubsection.3.4.2.7}%
+\contentsline {section}{\numberline {3.5}writer Namespace Reference}{9}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Function Documentation}{10}{subsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.1.1}\_init\_workbook()}{10}{subsubsection.3.5.1.1}%
+\contentsline {subsubsection}{\numberline {3.5.1.2}write\_to\_excel()}{10}{subsubsection.3.5.1.2}%
+\contentsline {chapter}{\numberline {4}File Documentation}{11}{chapter.4}%
+\contentsline {section}{\numberline {4.1}config.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{11}{section.4.1}%
+\contentsline {section}{\numberline {4.2}extractor.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{11}{section.4.2}%
+\contentsline {section}{\numberline {4.3}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{12}{section.4.3}%
+\contentsline {section}{\numberline {4.4}parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{12}{section.4.4}%
+\contentsline {section}{\numberline {4.5}writer.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}py File Reference}{12}{section.4.5}%
