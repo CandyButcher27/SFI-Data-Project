@@ -84,8 +84,8 @@ The project consists of **two main pipelines**:
 1. **Clone the repository**:
 
 ```bash
-git clone https://github.com/yourusername/SPO-Framework-Extractor.git
-cd SPO-Framework-Extractor
+git clone https://github.com/CandyButcher27/SFI-Data-Project.git
+cd SFI-Data-Project
 ```
 ### 2. **Create a Virtual Envoirnemnt** :
 
