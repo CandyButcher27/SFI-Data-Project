@@ -1,0 +1,27 @@
+[
+  {
+    "id": "framework_extraction",
+    "instruction": "From the given PDF document, extract the following details about the framework. If a field is not explicitly mentioned, return an empty string.\n1. Issuer – The company or organization that issued the PDF.\n2. Framework Name – The official name/title of the framework.\n3. Alignment – The sustainability, financial, or standards alignment mentioned in the framework (e.g., ICMA, EU Taxonomy, UN SDGs).\n4. Year – The year in which the framework was published or created.\n5. Framework Source – The source or reference from where the framework originates (e.g., company website, report section, or cited authority).\n6. External Verification – Information provided under the heading 'External Verification' (if available).\n7. Impact Reporting – Information provided under the heading 'Impact Reporting' (if available).\n8. Exclusion Criteria – The criteria on which the framework does not apply or will not function. \n9. EU Taxonomy Alignment : Check if the company is Aligned or Not Aligned ",
+    "json_schema": {
+      "Issuer": "",
+      "Framework Name": "",
+      "Alignment": "",
+      "Year": "",
+      "Framework Source": "",
+      "External Verification": "",
+      "Impact Reporting": "",
+      "Exclusion Criteria": ""
+    },
+    "run_for": "framework"
+  },
+{
+  "id": "spo_extraction",
+  "instruction": "From the given PDF document, extract the following details about the Second Party Opinion (SPO). If a field is not explicitly mentioned, return an empty string.\n1. Summary – A concise summary of the entire document in exactly 50 words.\n2. SPO Date – Extract the publication or opinion date from the first page. Look for patterns like 'dd Month yyyy', 'Month yyyy', or just 'yyyy'.\n3. SPO Provider – Extract the organization that issued the SPO. Typical providers include Sustainalytics, ISS ESG, Moody’s, CICERO, DNV. If multiple names appear, choose the one labeled as 'provider' or the most prominent logo on the cover page.",
+  "json_schema": {
+    "Summary": "",
+    "SPO Date": "",
+    "SPO Provider": ""
+  },
+  "run_for": "spo"
+}
+]

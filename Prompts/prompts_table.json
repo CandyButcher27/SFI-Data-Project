@@ -1,0 +1,60 @@
+{
+  "task_description": "Extract structured information from the provided context related to the 'Use of Proceeds' section of a bond framework and its associated Second Party Opinion (SPO).",
+  "steps": [
+    "Locate the 'Use of Proceeds' section within the provided context.",
+    "Identify the table under this section and extract the first column as the 'Use of Proceeds' categories.",
+    "For each 'Use of Proceeds' category, identify all associated eligibility criteria listed in the same table. Each row in the table corresponds to one eligibility criterion.",
+    "For each eligibility criterion, search the Second Party Opinion portion of the context to find the **closest relevant commentary or evaluative statement**. Extract the text **verbatim**, exactly as it appears in the SPO, and record it under 'SPO_Evaluation'. **Do not summarize or simplify into labels like Positive/Negative.**",
+    "If the document mentions EU Taxonomy information, extract the following for each eligibility criterion: 'EU_Taxonomy_Alignment', 'DNSH', 'Minimum_Safeguards', 'NACE_Code', and 'EU_Taxonomy_Economic_Activity'. If not mentioned, mark as 'Not Reported'.",
+    "Identify and list all Sustainable Development Goals (SDGs) associated with each 'Use of Proceeds'. These can be one or more numbers (e.g., 6, 7, 13)."
+  ],
+  "output_format_description": "The LLM must output data in a hierarchical JSON format, grouping eligibility criteria under each 'Use of Proceeds', and including all associated details such as SDGs, SPO commentary, and EU Taxonomy fields.",
+  "output_json_structure": {
+    "Use_of_Proceeds": [
+      {
+        "Name": "<string: name of the use of proceeds category>",
+        "SDGs": [
+          "<string: SDG number or description>",
+          "<string: optional additional SDG>"
+        ],
+        "Eligibility_Criteria": [
+          {
+            "Description": "<string: eligibility criterion description>",
+            "SPO_Evaluation": "<string: exact text or commentary from the SPO section>",
+            "EU_Taxonomy_Alignment": "<string: report status or alignment>",
+            "DNSH": "<string: do no significant harm status>",
+            "Minimum_Safeguards": "<string: report status>",
+            "NACE_Code": "<string: NACE code if reported>",
+            "EU_Taxonomy_Economic_Activity": "<string: economic activity if reported>"
+          }
+        ]
+      }
+    ]
+  },
+  "notes": [
+    "All fields should be filled with the exact wording from the document whenever possible.",
+    "If a field is not available or not mentioned, write 'Not Reported'.",
+    "The 'SPO_Evaluation' must be extracted verbatim. Do not reduce the commentary to simple labels or sentiment.",
+    "Ensure SDGs are returned as a list, even if only one applies.",
+    "Maintain the hierarchy: Use of Proceeds → Eligibility Criteria → SPO & EU Taxonomy details."
+  ],
+  "example_output": {
+    "Use_of_Proceeds": [
+      {
+        "Name": "Water Resource Protection",
+        "SDGs": ["6", "13"],
+        "Eligibility_Criteria": [
+          {
+            "Description": "Investment aiming at reducing at least by 20% water losses and installation of gauges for pressure and flow rate management",
+            "SPO_Evaluation": "ISS ESG confirms alignment with sustainable water management practices. The investment is expected to significantly reduce water wastage and improve local water efficiency. No major social or environmental risks were identified.",
+            "EU_Taxonomy_Alignment": "Not Reported",
+            "DNSH": "Not Reported",
+            "Minimum_Safeguards": "Not Reported",
+            "NACE_Code": "E36.00",
+            "EU_Taxonomy_Economic_Activity": "Not Reported"
+          }
+        ]
+      }
+    ]
+  }
+}
