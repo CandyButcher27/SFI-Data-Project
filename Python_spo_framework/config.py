@@ -14,6 +14,7 @@ MAIN_FOLDER = "TEst"
 # LLM model names
 GROQ_MODEL = "llama-3.3-70b-versatile"
 GEMINI_MODEL = "gemini-2.5-flash"
+OPENAI_MODEL = "GPT-5"
 
 #Contains the Prompts FIle
 PROMPTS_FILE = "Prompts/prompts_spo_framework.json"

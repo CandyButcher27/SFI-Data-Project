@@ -26,15 +26,17 @@ import json
 import time
 
 from extractor import extract_chunks_from_two_pdfs
-from parser import parse_with_llm
-from parser import parse_with_llm_gemini
+from parser import parse_with_llm_groq #for Groq
+from parser import parse_with_llm_gemini #for Gemini
+from parser import parse_with_llm_openai #for OpenAI
 from writer import write_to_excel   
 
 from table_extractor import process_subfolders_in_memory
 from table_parser import parser_for_table
 from table_writer import writer_to_excel_table
 
-from config import EXCEL_FILE, MAIN_FOLDER, GROQ_MODEL, GEMINI_MODEL, TOP_K, CHUNK_SIZE, OVERLAP , PROMPTS_FILE , PROMPTS_TABLE
+from config import EXCEL_FILE, MAIN_FOLDER, GROQ_MODEL, GEMINI_MODEL, OPENAI_MODEL
+from config import TOP_K, CHUNK_SIZE, OVERLAP , PROMPTS_FILE , PROMPTS_TABLE
 
 
 
@@ -103,13 +105,13 @@ def main():
             print(f"  Skipping {sub}: could not find a pair of PDFs (framework & spo).")
             continue
 
-        chunks = extract_chunks_from_two_pdfs(framework, spo,
-                                              chunk_size=CHUNK_SIZE,
-                                              overlap=OVERLAP,
-                                              folder_name=sub)
+        chunks = extract_chunks_from_two_pdfs(framework, spo,chunk_size=CHUNK_SIZE, overlap=OVERLAP,folder_name=sub)
 
-        # Use this if you want to use Groq model
-        # results = parse_with_llm(chunks, PROMPTS_FILE, groq_model=GROQ_MODEL, top_k=TOP_K)
+        #Use this if you want to use Groq model
+        results = parse_with_llm_groq(chunks, PROMPTS_FILE, groq_model=GROQ_MODEL, top_k=TOP_K)
+        
+        #Use this if you want to use OpenAI model
+        results = parse_with_llm_openai(chunks, PROMPTS_FILE, openai_model= OPENAI_MODEL, top_k = TOP_K)
 
         # Use this if you want to use Gemini model
         results = parse_with_llm_gemini(chunks,PROMPTS_FILE,gemini_model=GEMINI_MODEL,top_k=TOP_K)

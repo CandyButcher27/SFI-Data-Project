@@ -16,6 +16,7 @@ import json
 import numpy as np
 import time
 import re
+import openai
 
 from typing import List, Dict, Any
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -125,7 +126,7 @@ def call_groq(model: str, messages: List[Dict], temperature: float = 0.0, max_re
             time.sleep(1.0 * attempt)
 
 
-def parse_with_llm(chunks: List[Dict], prompts_path: str, groq_model: str, top_k: int = 5) -> List[Dict]:
+def parse_with_llm_groq(chunks: List[Dict], prompts_path: str, groq_model: str, top_k: int = 5) -> List[Dict]:
     """
     Parse chunks using Groq LLM based on provided prompts.
     """
@@ -296,4 +297,105 @@ def parse_with_llm_gemini(chunks: List[Dict], prompts_path: str, gemini_model: s
 
     return results
 
+# ---------------- OpenAI Parsing ---------------- #
 
+def call_openai(model: str, messages: List[Dict], temperature: float = 0.0, max_retries: int = 3) -> Dict:
+    """
+    Call OpenAI chat model with retries.
+
+    Args:
+        model (str): OpenAI model name.
+        messages (List[Dict]): List of messages with "role" and "content".
+        temperature (float): Sampling temperature.
+        max_retries (int): Number of retry attempts if call fails.
+
+    Returns:
+        Dict: Raw response from OpenAI API.
+    """
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise EnvironmentError("OPENAI_API_KEY not set in environment.")
+    
+    openai.api_key = api_key
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = openai.ChatCompletion.create(
+                model=model,
+                messages=messages,
+                temperature=temperature
+            )
+            return response
+        except Exception as e:
+            if attempt == max_retries:
+                raise
+            time.sleep(1.0 * attempt)
+
+
+def parse_with_llm_openai(chunks: List[Dict], prompts_path: str, openai_model: str, top_k: int = 5) -> List[Dict]:
+    """
+    Parse chunks using OpenAI LLM based on provided prompts.
+    """
+    with open(prompts_path, "r", encoding="utf-8") as f:
+        prompts = json.load(f)
+
+    results = []
+
+    for p in prompts:
+        run_for = p.get("run_for", "both").lower()
+        relevant_chunks = (
+            [c for c in chunks if c.get("source") == "framework"] if run_for == "framework"
+            else [c for c in chunks if c.get("source") == "spo"] if run_for == "spo"
+            else chunks
+        )
+
+        index = build_tfidf_index(relevant_chunks)
+        query = p.get("instruction") or p.get("query") or ""
+        top_idx = retrieve_top_k(query, index, k=top_k)
+        context = assemble_context(relevant_chunks, top_idx)
+
+        system_msg = {
+            "role": "system",
+            "content": (
+                "You are a JSON extraction assistant. Use ONLY the provided CONTEXT to answer. "
+                "Output must be valid JSON and must match the provided schema or example. "
+                "If a field cannot be found in the context, set it to null or an empty string."
+            )
+        }
+
+        user_content = (
+            f"CONTEXT:\n\n{context}\n\n"
+            f"INSTRUCTION:\n\n{p['instruction']}\n\n"
+            f"OUTPUT_SCHEMA / EXAMPLE:\n\n{json.dumps(p['json_schema'], indent=2)}\n\n"
+            "Return ONLY the JSON (no extra commentary)."
+        )
+        user_msg = {"role": "user", "content": user_content}
+
+        resp = call_openai(model=openai_model, messages=[system_msg, user_msg], temperature=0.0)
+
+        try:
+            content = resp.choices[0].message.content
+        except Exception:
+            content = str(resp)
+
+        try:
+            parsed = json.loads(content)
+        except Exception:
+            m = re.search(r'(\{.*\}|\[.*\])', content, flags=re.S)
+            if m:
+                try:
+                    parsed = json.loads(m.group(1))
+                except Exception:
+                    parsed = {"_raw": content}
+            else:
+                parsed = {"_raw": content}
+
+        results.append({
+            "prompt_id": p.get("id"),
+            "run_for": run_for,
+            "result": parsed,
+            "used_context_indices": top_idx,
+            "raw_model_output": content
+        })
+
+    return results

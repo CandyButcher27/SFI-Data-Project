@@ -110,13 +110,23 @@ pip install -r requirements.txt
 ```
 ### 5. **Set Environment Variables**
 ```bash
-# Mac/Linux
+# ---------------- Mac / Linux ----------------
 export LLMWHISPERER_API_KEY='your_api_key'
 export OPENAI_API_KEY='your_api_key'
+export GEMINI_API_KEY='your_api_key'
+export GROQ_API_KEY='your_api_key'
 
-# Windows (CMD)
+# ---------------- Windows (CMD) ----------------
 set LLMWHISPERER_API_KEY='your_api_key'
 set OPENAI_API_KEY='your_api_key'
+set GEMINI_API_KEY='your_api_key'
+set GROQ_API_KEY='your_api_key'
+
+# ---------------- Windows (PowerShell) ----------------
+$env:LLMWHISPERER_API_KEY='your_api_key'
+$env:OPENAI_API_KEY='your_api_key'
+$env:GEMINI_API_KEY='your_api_key'
+$env:GROQ_API_KEY='your_api_key'
 ```
 ### 6. **Run the PipeLine**
 ```bash
