@@ -21,11 +21,11 @@ from unstract.llmwhisperer import LLMWhispererClientV2
 from dotenv import load_dotenv
 load_dotenv()
 
-from config import MAIN_FOLDER , WHISPER_BASE
+from config import MAIN_FOLDER , WHISPERER_BASE
 
 # ---------- Configuration ----------
 ROOT_FOLDER = MAIN_FOLDER
-WHISPERER_BASE = WHISPER_BASE
+WHISPERER_BASE = WHISPERER_BASE
 WHISPERER_API_KEY = os.getenv("LLMWHISPERER_API_KEY")
 # -----------------------------------
 

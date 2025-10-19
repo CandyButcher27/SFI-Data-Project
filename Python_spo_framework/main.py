@@ -23,6 +23,7 @@ Functions:
 import os
 import re
 import json
+import time
 
 from extractor import extract_chunks_from_two_pdfs
 from parser import parse_with_llm
@@ -131,14 +132,17 @@ def main_table():
     3. Write parsed tabular data to Excel using table_writer.
     """
     
-    results = process_subfolders_in_memory("Main_framework")
+    results = process_subfolders_in_memory(MAIN_FOLDER)
     for company, text in results.items():
         parsed_dict = parser_for_table(text ,PROMPTS_TABLE)            
         writer_to_excel_table(parsed_dict , EXCEL_FILE)
     
 
 if __name__ == "__main__":
+    start_time = time.time()    
     main()
     main_table()
     print("Processing completed :)")
+    end_time = time.time()
+    print("Total execution time:", end_time - start_time, "seconds")
     

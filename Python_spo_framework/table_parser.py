@@ -99,7 +99,5 @@ Important: Output only the JSON object, without any markdown or explanations.
 
     return parsed
 
-
-if __name__ == "__main__":
     
 

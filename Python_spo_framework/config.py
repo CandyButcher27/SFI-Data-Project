@@ -9,7 +9,7 @@ model names, and parameters for text chunking and retrieval.
 EXCEL_FILE = "Framewrok and SPO Output.xlsx"
 
 # Folder containing all main framework files
-MAIN_FOLDER = "Main_spo_framework"
+MAIN_FOLDER = "TEst"
 
 # LLM model names
 GROQ_MODEL = "llama-3.3-70b-versatile"
