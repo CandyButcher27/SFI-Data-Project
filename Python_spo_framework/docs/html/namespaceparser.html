@@ -98,9 +98,11 @@ Functions</h2></td></tr>
 <tr class="memitem:aad5672a986c6d407f5b31c17a8c05b91" id="r_aad5672a986c6d407f5b31c17a8c05b91"><td class="memItemLeft" align="right" valign="top">List[int]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad5672a986c6d407f5b31c17a8c05b91">retrieve_top_k</a> (str query, Dict index, int k=5)</td></tr>
 <tr class="memitem:a0b12654d06f7ea83a3ec6c38db346f93" id="r_a0b12654d06f7ea83a3ec6c38db346f93"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0b12654d06f7ea83a3ec6c38db346f93">assemble_context</a> (List[Dict] chunks, List[int] top_indices)</td></tr>
 <tr class="memitem:acab60c601c5aac8781ad0a5e62d95b66" id="r_acab60c601c5aac8781ad0a5e62d95b66"><td class="memItemLeft" align="right" valign="top">Dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acab60c601c5aac8781ad0a5e62d95b66">call_groq</a> (str model, List[Dict] messages, float temperature=0.0, int max_retries=3)</td></tr>
-<tr class="memitem:a9dd2796b938536ca8fb63b5423bba479" id="r_a9dd2796b938536ca8fb63b5423bba479"><td class="memItemLeft" align="right" valign="top">List[Dict]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9dd2796b938536ca8fb63b5423bba479">parse_with_llm</a> (List[Dict] chunks, str prompts_path, str groq_model, int top_k=5)</td></tr>
+<tr class="memitem:a726ae959fffb5b4f7277e84d701dce90" id="r_a726ae959fffb5b4f7277e84d701dce90"><td class="memItemLeft" align="right" valign="top">List[Dict]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a726ae959fffb5b4f7277e84d701dce90">parse_with_llm_groq</a> (List[Dict] chunks, str prompts_path, str groq_model, int top_k=5)</td></tr>
 <tr class="memitem:ab69cb3397febf36cea543c2f952d44de" id="r_ab69cb3397febf36cea543c2f952d44de"><td class="memItemLeft" align="right" valign="top">Dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab69cb3397febf36cea543c2f952d44de">call_gemini</a> (str model_gemini, List[Dict] messages, float temperature=0.0, int max_retries=3)</td></tr>
 <tr class="memitem:a32f3e62367c5448782f49bb710f41055" id="r_a32f3e62367c5448782f49bb710f41055"><td class="memItemLeft" align="right" valign="top">List[Dict]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32f3e62367c5448782f49bb710f41055">parse_with_llm_gemini</a> (List[Dict] chunks, str prompts_path, str gemini_model, int top_k=5)</td></tr>
+<tr class="memitem:a80105234b8f194978fd2a841e030821c" id="r_a80105234b8f194978fd2a841e030821c"><td class="memItemLeft" align="right" valign="top">Dict&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80105234b8f194978fd2a841e030821c">call_openai</a> (str model, List[Dict] messages, float temperature=0.0, int max_retries=3)</td></tr>
+<tr class="memitem:af9433b9d255baa5a380bee56a8e0ff29" id="r_af9433b9d255baa5a380bee56a8e0ff29"><td class="memItemLeft" align="right" valign="top">List[Dict]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9433b9d255baa5a380bee56a8e0ff29">parse_with_llm_openai</a> (List[Dict] chunks, str prompts_path, str openai_model, int top_k=5)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">parser.py
@@ -244,35 +246,44 @@ Returns:
 </pre> 
 </div>
 </div>
-<a id="a9dd2796b938536ca8fb63b5423bba479" name="a9dd2796b938536ca8fb63b5423bba479"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9dd2796b938536ca8fb63b5423bba479">&#9670;&#160;</a></span>parse_with_llm()</h2>
+<a id="a80105234b8f194978fd2a841e030821c" name="a80105234b8f194978fd2a841e030821c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80105234b8f194978fd2a841e030821c">&#9670;&#160;</a></span>call_openai()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"> List[Dict] parser.parse_with_llm </td>
+          <td class="memname"> Dict parser.call_openai </td>
           <td>(</td>
-          <td class="paramtype">List[Dict]</td>          <td class="paramname"><span class="paramname"><em>chunks</em></span>, </td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>model</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>prompts_path</em></span>, </td>
+          <td class="paramtype">List[Dict]</td>          <td class="paramname"><span class="paramname"><em>messages</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>groq_model</em></span>, </td>
+          <td class="paramtype">float </td>          <td class="paramname"><span class="paramname"><em>temperature</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0.0</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int </td>          <td class="paramname"><span class="paramname"><em>top_k</em></span><span class="paramdefsep"> = </span><span class="paramdefval">5</span>&#160;)</td>
+          <td class="paramtype">int </td>          <td class="paramname"><span class="paramname"><em>max_retries</em></span><span class="paramdefsep"> = </span><span class="paramdefval">3</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Parse chunks using Groq LLM based on provided prompts.
+<pre class="fragment">Call OpenAI chat model with retries.
+
+Args:
+    model (str): OpenAI model name.
+    messages (List[Dict]): List of messages with "role" and "content".
+    temperature (float): Sampling temperature.
+    max_retries (int): Number of retry attempts if call fails.
+
+Returns:
+    Dict: Raw response from OpenAI API.
 </pre> 
 </div>
 </div>
@@ -305,6 +316,70 @@ Returns:
       </table>
 </div><div class="memdoc">
 <pre class="fragment">Parse chunks using Gemini LLM based on provided prompts.
+</pre> 
+</div>
+</div>
+<a id="a726ae959fffb5b4f7277e84d701dce90" name="a726ae959fffb5b4f7277e84d701dce90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a726ae959fffb5b4f7277e84d701dce90">&#9670;&#160;</a></span>parse_with_llm_groq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> List[Dict] parser.parse_with_llm_groq </td>
+          <td>(</td>
+          <td class="paramtype">List[Dict]</td>          <td class="paramname"><span class="paramname"><em>chunks</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>prompts_path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>groq_model</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int </td>          <td class="paramname"><span class="paramname"><em>top_k</em></span><span class="paramdefsep"> = </span><span class="paramdefval">5</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Parse chunks using Groq LLM based on provided prompts.
+</pre> 
+</div>
+</div>
+<a id="af9433b9d255baa5a380bee56a8e0ff29" name="af9433b9d255baa5a380bee56a8e0ff29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9433b9d255baa5a380bee56a8e0ff29">&#9670;&#160;</a></span>parse_with_llm_openai()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"> List[Dict] parser.parse_with_llm_openai </td>
+          <td>(</td>
+          <td class="paramtype">List[Dict]</td>          <td class="paramname"><span class="paramname"><em>chunks</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>prompts_path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">str</td>          <td class="paramname"><span class="paramname"><em>openai_model</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int </td>          <td class="paramname"><span class="paramname"><em>top_k</em></span><span class="paramdefsep"> = </span><span class="paramdefval">5</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">Parse chunks using OpenAI LLM based on provided prompts.
 </pre> 
 </div>
 </div>

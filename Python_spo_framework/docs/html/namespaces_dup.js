@@ -6,6 +6,7 @@ var namespaces_dup =
       [ "GEMINI_MODEL", "namespaceconfig.html#a905ed55960699b7daca5c19f619c11ec", null ],
       [ "GROQ_MODEL", "namespaceconfig.html#a92313d0e62b8ae9a5fa2c988c73d8923", null ],
       [ "MAIN_FOLDER", "namespaceconfig.html#acd1429888f581e530a12ec14ef8977ab", null ],
+      [ "OPENAI_MODEL", "namespaceconfig.html#ae0cbfef48603cfe194b786fe37b74a37", null ],
       [ "OVERLAP", "namespaceconfig.html#adf142943bb98659c7ddd56334e15c996", null ],
       [ "PROMPTS_FILE", "namespaceconfig.html#a2620e6a69733c97e2b520ef9cbbe4139", null ],
       [ "PROMPTS_TABLE", "namespaceconfig.html#a510f5224096fb1b55d6e038668657a0c", null ],
@@ -20,15 +21,19 @@ var namespaces_dup =
     [ "main", "namespacemain.html", [
       [ "find_pdf_pair", "namespacemain.html#a1e0d6025153d68f3b868d4ffce35ad92", null ],
       [ "main", "namespacemain.html#a3140e9a5b6a71ffbf498198cfc471b88", null ],
-      [ "main_table", "namespacemain.html#a89baafe773d8a820fcbef9cbdc139793", null ]
+      [ "main_table", "namespacemain.html#a89baafe773d8a820fcbef9cbdc139793", null ],
+      [ "end_time", "namespacemain.html#af5f82ecbf21dc9e0582f9c4e03fa5b98", null ],
+      [ "start_time", "namespacemain.html#ae57958345b17f9ca8597330ba07e1a1c", null ]
     ] ],
     [ "parser", "namespaceparser.html", [
       [ "assemble_context", "namespaceparser.html#a0b12654d06f7ea83a3ec6c38db346f93", null ],
       [ "build_tfidf_index", "namespaceparser.html#a34d250abe9dac9c81e16665c6e909eb2", null ],
       [ "call_gemini", "namespaceparser.html#ab69cb3397febf36cea543c2f952d44de", null ],
       [ "call_groq", "namespaceparser.html#acab60c601c5aac8781ad0a5e62d95b66", null ],
-      [ "parse_with_llm", "namespaceparser.html#a9dd2796b938536ca8fb63b5423bba479", null ],
+      [ "call_openai", "namespaceparser.html#a80105234b8f194978fd2a841e030821c", null ],
       [ "parse_with_llm_gemini", "namespaceparser.html#a32f3e62367c5448782f49bb710f41055", null ],
+      [ "parse_with_llm_groq", "namespaceparser.html#a726ae959fffb5b4f7277e84d701dce90", null ],
+      [ "parse_with_llm_openai", "namespaceparser.html#af9433b9d255baa5a380bee56a8e0ff29", null ],
       [ "retrieve_top_k", "namespaceparser.html#aad5672a986c6d407f5b31c17a8c05b91", null ]
     ] ],
     [ "table_extractor", "namespacetable__extractor.html", [

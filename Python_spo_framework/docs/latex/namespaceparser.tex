@@ -11,11 +11,15 @@ str \mbox{\hyperlink{namespaceparser_a0b12654d06f7ea83a3ec6c38db346f93}{assemble
 \item 
 Dict \mbox{\hyperlink{namespaceparser_acab60c601c5aac8781ad0a5e62d95b66}{call\+\_\+groq}} (str model, List\mbox{[}Dict\mbox{]} messages, float temperature=0.\+0, int max\+\_\+retries=3)
 \item 
-List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{namespaceparser_a9dd2796b938536ca8fb63b5423bba479}{parse\+\_\+with\+\_\+llm}} (List\mbox{[}Dict\mbox{]} chunks, str prompts\+\_\+path, str groq\+\_\+model, int top\+\_\+k=5)
+List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{namespaceparser_a726ae959fffb5b4f7277e84d701dce90}{parse\+\_\+with\+\_\+llm\+\_\+groq}} (List\mbox{[}Dict\mbox{]} chunks, str prompts\+\_\+path, str groq\+\_\+model, int top\+\_\+k=5)
 \item 
 Dict \mbox{\hyperlink{namespaceparser_ab69cb3397febf36cea543c2f952d44de}{call\+\_\+gemini}} (str model\+\_\+gemini, List\mbox{[}Dict\mbox{]} messages, float temperature=0.\+0, int max\+\_\+retries=3)
 \item 
 List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{namespaceparser_a32f3e62367c5448782f49bb710f41055}{parse\+\_\+with\+\_\+llm\+\_\+gemini}} (List\mbox{[}Dict\mbox{]} chunks, str prompts\+\_\+path, str gemini\+\_\+model, int top\+\_\+k=5)
+\item 
+Dict \mbox{\hyperlink{namespaceparser_a80105234b8f194978fd2a841e030821c}{call\+\_\+openai}} (str model, List\mbox{[}Dict\mbox{]} messages, float temperature=0.\+0, int max\+\_\+retries=3)
+\item 
+List\mbox{[}Dict\mbox{]} \mbox{\hyperlink{namespaceparser_af9433b9d255baa5a380bee56a8e0ff29}{parse\+\_\+with\+\_\+llm\+\_\+openai}} (List\mbox{[}Dict\mbox{]} chunks, str prompts\+\_\+path, str openai\+\_\+model, int top\+\_\+k=5)
 \end{DoxyCompactItemize}
 
 
@@ -94,13 +98,22 @@ Args:
 Returns:
     Dict: Raw response from Groq API.
 \end{DoxyVerb}
- \Hypertarget{namespaceparser_a9dd2796b938536ca8fb63b5423bba479}\index{parser@{parser}!parse\_with\_llm@{parse\_with\_llm}}
-\index{parse\_with\_llm@{parse\_with\_llm}!parser@{parser}}
-\doxysubsubsection{\texorpdfstring{parse\_with\_llm()}{parse\_with\_llm()}}
-{\footnotesize\ttfamily \label{namespaceparser_a9dd2796b938536ca8fb63b5423bba479} 
- List\mbox{[}Dict\mbox{]} parser.\+parse\+\_\+with\+\_\+llm (\begin{DoxyParamCaption}\item[{List\mbox{[}Dict\mbox{]}}]{chunks}{, }\item[{str}]{prompts\+\_\+path}{, }\item[{str}]{groq\+\_\+model}{, }\item[{int }]{top\+\_\+k}{ = {\ttfamily 5}}\end{DoxyParamCaption})}
+ \Hypertarget{namespaceparser_a80105234b8f194978fd2a841e030821c}\index{parser@{parser}!call\_openai@{call\_openai}}
+\index{call\_openai@{call\_openai}!parser@{parser}}
+\doxysubsubsection{\texorpdfstring{call\_openai()}{call\_openai()}}
+{\footnotesize\ttfamily \label{namespaceparser_a80105234b8f194978fd2a841e030821c} 
+ Dict parser.\+call\+\_\+openai (\begin{DoxyParamCaption}\item[{str}]{model}{, }\item[{List\mbox{[}Dict\mbox{]}}]{messages}{, }\item[{float }]{temperature}{ = {\ttfamily 0.0}, }\item[{int }]{max\+\_\+retries}{ = {\ttfamily 3}}\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Parse chunks using Groq LLM based on provided prompts.
+\begin{DoxyVerb}Call OpenAI chat model with retries.
+
+Args:
+    model (str): OpenAI model name.
+    messages (List[Dict]): List of messages with "role" and "content".
+    temperature (float): Sampling temperature.
+    max_retries (int): Number of retry attempts if call fails.
+
+Returns:
+    Dict: Raw response from OpenAI API.
 \end{DoxyVerb}
  \Hypertarget{namespaceparser_a32f3e62367c5448782f49bb710f41055}\index{parser@{parser}!parse\_with\_llm\_gemini@{parse\_with\_llm\_gemini}}
 \index{parse\_with\_llm\_gemini@{parse\_with\_llm\_gemini}!parser@{parser}}
@@ -109,6 +122,22 @@ Returns:
  List\mbox{[}Dict\mbox{]} parser.\+parse\+\_\+with\+\_\+llm\+\_\+gemini (\begin{DoxyParamCaption}\item[{List\mbox{[}Dict\mbox{]}}]{chunks}{, }\item[{str}]{prompts\+\_\+path}{, }\item[{str}]{gemini\+\_\+model}{, }\item[{int }]{top\+\_\+k}{ = {\ttfamily 5}}\end{DoxyParamCaption})}
 
 \begin{DoxyVerb}Parse chunks using Gemini LLM based on provided prompts.
+\end{DoxyVerb}
+ \Hypertarget{namespaceparser_a726ae959fffb5b4f7277e84d701dce90}\index{parser@{parser}!parse\_with\_llm\_groq@{parse\_with\_llm\_groq}}
+\index{parse\_with\_llm\_groq@{parse\_with\_llm\_groq}!parser@{parser}}
+\doxysubsubsection{\texorpdfstring{parse\_with\_llm\_groq()}{parse\_with\_llm\_groq()}}
+{\footnotesize\ttfamily \label{namespaceparser_a726ae959fffb5b4f7277e84d701dce90} 
+ List\mbox{[}Dict\mbox{]} parser.\+parse\+\_\+with\+\_\+llm\+\_\+groq (\begin{DoxyParamCaption}\item[{List\mbox{[}Dict\mbox{]}}]{chunks}{, }\item[{str}]{prompts\+\_\+path}{, }\item[{str}]{groq\+\_\+model}{, }\item[{int }]{top\+\_\+k}{ = {\ttfamily 5}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Parse chunks using Groq LLM based on provided prompts.
+\end{DoxyVerb}
+ \Hypertarget{namespaceparser_af9433b9d255baa5a380bee56a8e0ff29}\index{parser@{parser}!parse\_with\_llm\_openai@{parse\_with\_llm\_openai}}
+\index{parse\_with\_llm\_openai@{parse\_with\_llm\_openai}!parser@{parser}}
+\doxysubsubsection{\texorpdfstring{parse\_with\_llm\_openai()}{parse\_with\_llm\_openai()}}
+{\footnotesize\ttfamily \label{namespaceparser_af9433b9d255baa5a380bee56a8e0ff29} 
+ List\mbox{[}Dict\mbox{]} parser.\+parse\+\_\+with\+\_\+llm\+\_\+openai (\begin{DoxyParamCaption}\item[{List\mbox{[}Dict\mbox{]}}]{chunks}{, }\item[{str}]{prompts\+\_\+path}{, }\item[{str}]{openai\+\_\+model}{, }\item[{int }]{top\+\_\+k}{ = {\ttfamily 5}}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Parse chunks using OpenAI LLM based on provided prompts.
 \end{DoxyVerb}
  \Hypertarget{namespaceparser_aad5672a986c6d407f5b31c17a8c05b91}\index{parser@{parser}!retrieve\_top\_k@{retrieve\_top\_k}}
 \index{retrieve\_top\_k@{retrieve\_top\_k}!parser@{parser}}
