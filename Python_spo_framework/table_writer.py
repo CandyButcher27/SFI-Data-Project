@@ -29,18 +29,49 @@ def writer_to_excel_table(answer: dict, EXCEL_FILE: str):
 
     sheet_elig = "Eligibility+EU Tax"
     sheet_sdg = "SDG"
+    
+    eligibility_headers = [
+    "Framework ID",
+    "Use of Proceeds",
+    "Eligiblity Criteria",
+    "SPO Evaluation",
+    "EU Taxonomy Alignment",
+    "DNSH",
+    "Minimum Safeguards",
+    "EU Taxonomy and Economic Activities"
+    ]
 
-    # --- Ensure Excel file exists ---
+    sdg_headers = [
+    "Framework ID",
+    "Use of Proceeds",
+    "SDG"
+    ]
+
+    # --- Ensure Excel file exists and if not then create it with the relevant columns ---
     if not os.path.exists(EXCEL_FILE):
-        # Create empty workbook first
+        
+        df_eligibility = pd.DataFrame(columns=eligibility_headers)
+        df_sdg = pd.DataFrame(columns=sdg_headers)
+        
+        # Create the workbook
         with pd.ExcelWriter(EXCEL_FILE, engine="openpyxl") as writer:
-            pass
+            df_eligibility.to_excel(writer, sheet_name="Eligiblity+EU Tax", index=False)
+            df_sdg.to_excel(writer, sheet_name="SDG", index=False)
+
 
     # --- Ensure sheets exist ---
     wb = load_workbook(EXCEL_FILE)
-    for sheet_name in [sheet_elig, sheet_sdg]:
+    
+    for sheet_name,headers in [(sheet_elig, eligibility_headers), (sheet_sdg, sdg_headers)]:
+        
         if sheet_name not in wb.sheetnames:
-            wb.create_sheet(sheet_name)
+            ws = wb.create_sheet(sheet_name)
+            ws.append(headers)
+        else:
+            ws = wb[sheet_name]
+            if ws.max_row==0:
+                ws.appead(headers)         
+            
     wb.save(EXCEL_FILE)
     wb.close()
 
