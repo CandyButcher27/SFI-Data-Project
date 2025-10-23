@@ -69,7 +69,8 @@ Important: Output only the JSON object, without any markdown or explanations.
     # Send request to the LLM
     response = client.chat.completions.create(
         model=model_name,
-        messages=[{"role": "user", "content": prompt}]
+        messages=[{"role": "user", "content": prompt}],
+        temperature = 0.0
     )
 
     # Get LLM content
