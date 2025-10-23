@@ -27,6 +27,7 @@ output_spo_framework.xlsx
 output_termsheet.xlsx
 working_Setup.xlsx
 Main.xlsx
+Test Output.xlsx
 
 # -----------------------------
 # Documentation / Reports
@@ -66,3 +67,8 @@ __pypackages__/
 # Latex Files
 # -----------------------------
 docs/latex
+
+# -----------------------------
+# Test FOlders
+# -----------------------------
+Test
