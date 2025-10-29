@@ -1,7 +1,7 @@
 [
   {
     "id": "framework_extraction",
-    "instruction": "From the given PDF document, extract the following details about the framework. If a field is not explicitly mentioned, return an empty string.\n1. Issuer – The company or organization that issued the PDF.\n2. Framework Name – The official name/title of the framework.\n3. Alignment – The sustainability, financial, or standards alignment mentioned in the framework (e.g., ICMA, EU Taxonomy, UN SDGs).\n4. Year – The year in which the framework was published or created.\n5. Framework Source – The source or reference from where the framework originates (e.g., company website, report section, or cited authority).\n6. External Verification – Information provided under the heading 'External Verification' (if available).\n7. Impact Reporting – Information provided under the heading 'Impact Reporting' (if available).\n8. Exclusion Criteria – The criteria on which the framework does not apply or will not function. \n9. EU Taxonomy Alignment : Check if the company is Aligned or Not Aligned ",
+    "instruction": "From the given PDF document, extract the following details about the framework. For each field, if the information is not clearly available, return 'N/A' instead of leaving it blank. Do not infer or assume values not supported by the text. Always return a JSON object strictly following the given schema.\n\nFields to extract:\n1. Issuer – The company or organization that issued the PDF.\n2. Framework Name – The official name/title of the framework.\n3. Alignment – The sustainability, financial, or standards alignment mentioned in the framework (e.g., ICMA, EU Taxonomy, UN SDGs).\n4. Year – The year in which the framework was published or created (usually on the first page).\n5. Framework Source – The source or reference from where the framework originates (e.g., company website, report section, or cited authority).\n6. External Verification – Information provided under the heading 'External Verification' (if available).\n7. Impact Reporting – Information provided under the heading 'Impact Reporting' (if available).\n8. Exclusion Criteria – The criteria on which the framework does not apply or will not function. These are sectors or project types that are not allowed to be financed (e.g., coal plants, nuclear, weapons, etc.).\n9. EU Taxonomy Alignment – Whether the company is Aligned or Not Aligned.\n\nEnsure every key in the output JSON has a value (either extracted text or 'N/A').",
     "json_schema": {
       "Issuer": "",
       "Framework Name": "",
@@ -10,18 +10,19 @@
       "Framework Source": "",
       "External Verification": "",
       "Impact Reporting": "",
-      "Exclusion Criteria": ""
+      "Exclusion Criteria": "",
+      "EU Taxonomy Alignment": ""
     },
     "run_for": "framework"
   },
-{
-  "id": "spo_extraction",
-  "instruction": "From the given PDF document, extract the following details about the Second Party Opinion (SPO). If a field is not explicitly mentioned, return an empty string.\n1. Summary – A concise summary of the entire document in exactly 50 words.\n2. SPO Date – Extract the publication or opinion date from the first page. Look for patterns like 'dd Month yyyy', 'Month yyyy', or just 'yyyy'.\n3. SPO Provider – Extract the organization that issued the SPO. Typical providers include Sustainalytics, ISS ESG, Moody’s, CICERO, DNV. If multiple names appear, choose the one labeled as 'provider' or the most prominent logo on the cover page.",
-  "json_schema": {
-    "Summary": "",
-    "SPO Date": "",
-    "SPO Provider": ""
-  },
-  "run_for": "spo"
-}
+  {
+    "id": "spo_extraction",
+    "instruction": "From the given PDF document, extract the following details about the Second Party Opinion (SPO). If a field is not found, return 'N/A' instead of leaving it blank. Do not infer or fabricate any data. Always return JSON strictly matching the given schema.\n\nFields to extract:\n1. Summary – A concise summary of the entire document in exactly 50 words.\n2. SPO Date – Extract the publication or opinion date from the first page. Look for patterns like 'dd Month yyyy', 'Month yyyy', or 'yyyy'. If day, month, and year are all present, convert the date to the format 'dd/mm/yyyy' (e.g., '5th September 2008' → '05/09/2008'). Always convert month names to their numeric equivalents.\n3. SPO Provider – The organization that issued the SPO (e.g., Sustainalytics, ISS ESG, Moody’s, CICERO, DNV). If multiple names appear, choose the one labeled as 'provider' or the most prominent logo on the cover page.\n\nEnsure every key in the output JSON has a value (either extracted text or 'N/A').",
+    "json_schema": {
+      "Summary": "",
+      "SPO Date": "",
+      "SPO Provider": ""
+    },
+    "run_for": "spo"
+  }
 ]
