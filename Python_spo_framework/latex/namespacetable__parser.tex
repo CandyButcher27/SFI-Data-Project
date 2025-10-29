@@ -1,0 +1,49 @@
+\doxysection{table\+\_\+parser Namespace Reference}
+\hypertarget{namespacetable__parser}{}\label{namespacetable__parser}\index{table\_parser@{table\_parser}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+dict \mbox{\hyperlink{namespacetable__parser_afc997e3fbd7c1656f1c0f59e3af5c50f}{parser\+\_\+for\+\_\+table}} (str extracted\+\_\+text, str prompt\+\_\+json\+\_\+path)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{namespacetable__parser_a2497a363e65cb562cf5cfee7d801fa49}\label{namespacetable__parser_a2497a363e65cb562cf5cfee7d801fa49} 
+{\bfseries LLM\+\_\+\+API\+\_\+\+KEY} = os.\+getenv("{}OPENAI\+\_\+\+API\+\_\+\+KEY"{})
+\item 
+\Hypertarget{namespacetable__parser_ab32ab124729da393e352021c7c787521}\label{namespacetable__parser_ab32ab124729da393e352021c7c787521} 
+{\bfseries MODEL\+\_\+\+NAME} = OPENAI\+\_\+\+MODEL
+\item 
+\Hypertarget{namespacetable__parser_a424e3f495ef6072cbb0e3f88d2eaaf2f}\label{namespacetable__parser_a424e3f495ef6072cbb0e3f88d2eaaf2f} 
+{\bfseries PROMPT\+\_\+\+JSON\+\_\+\+PATH} = PROMPTS\+\_\+\+TABLE
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}table_parser.py
+
+Parses extracted table text per company using a Large Language Model (LLM):
+- Reads extracted text from memory or cached text files
+- Loads instructions and JSON schema from Prompts/prompts_table.json
+- Sends extracted text + instructions to the LLM
+- Returns structured output as a Python dictionary, ensuring valid JSON even if LLM output is messy
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetable__parser_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetable__parser_afc997e3fbd7c1656f1c0f59e3af5c50f}\index{table\_parser@{table\_parser}!parser\_for\_table@{parser\_for\_table}}
+\index{parser\_for\_table@{parser\_for\_table}!table\_parser@{table\_parser}}
+\doxysubsubsection{\texorpdfstring{parser\_for\_table()}{parser\_for\_table()}}
+{\footnotesize\ttfamily \label{namespacetable__parser_afc997e3fbd7c1656f1c0f59e3af5c50f} 
+ dict table\+\_\+parser.\+parser\+\_\+for\+\_\+table (\begin{DoxyParamCaption}\item[{str}]{extracted\+\_\+text}{, }\item[{str}]{prompt\+\_\+json\+\_\+path}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Use OpenAI's LLM to extract structured info from extracted text according to the prompt JSON.
+Returns a Python dictionary, ensuring valid JSON even if the LLM output is messy.
+
+:param extracted_text: str, text extracted from table PDFs for a company
+:param prompt_json_path: path to the JSON file containing task_description and output_json_structure
+:return: dict, parsed JSON (fallback to {"_raw": <LLM output>} if parsing fails)
+\end{DoxyVerb}
+ 

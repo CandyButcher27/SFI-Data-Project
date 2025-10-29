@@ -1,0 +1,61 @@
+\doxysection{table\+\_\+writer Namespace Reference}
+\hypertarget{namespacetable__writer}{}\label{namespacetable__writer}\index{table\_writer@{table\_writer}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Workbook \mbox{\hyperlink{namespacetable__writer_a1514dadaebc5cb552c8ea3b272a7b6ff}{\+\_\+init\+\_\+workbook}} (str EXCEL\+\_\+\+FILE)
+\item 
+str \mbox{\hyperlink{namespacetable__writer_a72e6c067b5b1448b1bdf869cc685f98b}{\+\_\+get\+\_\+next\+\_\+framework\+\_\+id}} (ws)
+\item 
+\mbox{\hyperlink{namespacetable__writer_a0351aa02e2f6d39359e0262ce52d2950}{writer\+\_\+to\+\_\+excel\+\_\+table}} (Dict answer, str EXCEL\+\_\+\+FILE)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}table_writer.py
+
+Writes structured table extraction results from JSON into an Excel file.
+- Creates or ensures existence of two sheets:
+  1. 'Eligibility+EU Tax' — detailed criteria per Use of Proceeds
+  2. 'SDG' — summary of SDGs per Use of Proceeds
+- Handles appending to existing sheets safely, avoiding overwrite issues.
+\end{DoxyVerb}
+ 
+
+\label{doc-func-members}
+\Hypertarget{namespacetable__writer_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacetable__writer_a72e6c067b5b1448b1bdf869cc685f98b}\index{table\_writer@{table\_writer}!\_get\_next\_framework\_id@{\_get\_next\_framework\_id}}
+\index{\_get\_next\_framework\_id@{\_get\_next\_framework\_id}!table\_writer@{table\_writer}}
+\doxysubsubsection{\texorpdfstring{\_get\_next\_framework\_id()}{\_get\_next\_framework\_id()}}
+{\footnotesize\ttfamily \label{namespacetable__writer_a72e6c067b5b1448b1bdf869cc685f98b} 
+ str table\+\_\+writer.\+\_\+get\+\_\+next\+\_\+framework\+\_\+id (\begin{DoxyParamCaption}\item[{}]{ws}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Generate the next Framework ID based on the last entry in the worksheet.
+Returns:
+    str: Framework ID like 'F001', 'F002', ...
+\end{DoxyVerb}
+ \Hypertarget{namespacetable__writer_a1514dadaebc5cb552c8ea3b272a7b6ff}\index{table\_writer@{table\_writer}!\_init\_workbook@{\_init\_workbook}}
+\index{\_init\_workbook@{\_init\_workbook}!table\_writer@{table\_writer}}
+\doxysubsubsection{\texorpdfstring{\_init\_workbook()}{\_init\_workbook()}}
+{\footnotesize\ttfamily \label{namespacetable__writer_a1514dadaebc5cb552c8ea3b272a7b6ff} 
+ Workbook table\+\_\+writer.\+\_\+init\+\_\+workbook (\begin{DoxyParamCaption}\item[{str}]{EXCEL\+\_\+\+FILE}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyVerb}Create the Excel workbook with required sheets and headers if missing.
+Returns:
+    openpyxl Workbook object
+\end{DoxyVerb}
+ \Hypertarget{namespacetable__writer_a0351aa02e2f6d39359e0262ce52d2950}\index{table\_writer@{table\_writer}!writer\_to\_excel\_table@{writer\_to\_excel\_table}}
+\index{writer\_to\_excel\_table@{writer\_to\_excel\_table}!table\_writer@{table\_writer}}
+\doxysubsubsection{\texorpdfstring{writer\_to\_excel\_table()}{writer\_to\_excel\_table()}}
+{\footnotesize\ttfamily \label{namespacetable__writer_a0351aa02e2f6d39359e0262ce52d2950} 
+table\+\_\+writer.\+writer\+\_\+to\+\_\+excel\+\_\+table (\begin{DoxyParamCaption}\item[{Dict}]{answer}{, }\item[{str}]{EXCEL\+\_\+\+FILE}{}\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Writes structured data from parsed JSON into an Excel file.
+Automatically appends to existing sheets and generates Framework IDs.
+
+Args:
+    answer (dict): JSON containing Use_of_Proceeds, SDGs, and Eligibility Criteria.
+    EXCEL_FILE (str): Path to Excel file.
+\end{DoxyVerb}
+ 
