@@ -44,13 +44,25 @@ def find_framework_and_spo_pdfs(folder_path):
     files = os.listdir(folder_path)
     framework = None
     spo = None
+
     for f in files:
-        lower = f.lower()
-        if "framework" in lower:
-            framework = os.path.join(folder_path, f)
-        if "spo" in lower or "second party opinion" in lower or "second-party-opinion" in lower or "second party" in lower:
-            spo = os.path.join(folder_path, f)
+        lf = f.lower()
+        if lf.endswith(".pdf"):
+            # Strict framework condition
+            if "framework" in lf and not any(word in lf for word in ["spo", "second", "second-party-opinion"]):
+                framework = os.path.join(folder_path, f)
+            # SPO detection
+            elif any(word in lf for word in ["spo", "spoc", "second", "second-party-opinion"]):
+                spo = os.path.join(folder_path, f)
+
+    # Fallback: if exactly two PDFs exist, assume they're a pair
+    pdfs = [os.path.join(folder_path, f) for f in files if f.lower().endswith(".pdf")]
+    if not (framework and spo) and len(pdfs) == 2:
+        framework, spo = pdfs[0], pdfs[1]
+
     return framework, spo
+
+
 
 
 def get_pages_with_tables_pdfplumber(pdf_path):
@@ -179,7 +191,11 @@ def call_whisperer_and_get_text(merged_pdf_path):
         RuntimeError: If Whisperer does not return a valid whisper_hash.
     """
     client = LLMWhispererClientV2(base_url=WHISPERER_BASE, api_key=WHISPERER_API_KEY)
-    result = client.whisper(file_path=merged_pdf_path)
+    result = client.whisper(
+        file_path=merged_pdf_path,
+        mode = "low_cost",
+        output_mode = "layout_preserving"
+        )
     whisper_hash = result.get("whisper_hash")
     if not whisper_hash:
         raise RuntimeError("Whisperer did not return a whisper_hash.")
@@ -194,22 +210,64 @@ def call_whisperer_and_get_text(merged_pdf_path):
     return retrieved["extraction"]["result_text"]
 
 
+# def process_subfolders_in_memory(root_folder):
+#     """
+#     Process all company subfolders in memory:
+#     - Find framework and SPO PDFs
+#     - Extract table pages
+#     - Merge pages into temporary PDF
+#     - Send to LLM Whisperer
+#     - Return extracted text per company
+
+#     Args:
+#         root_folder (str): Path to the root folder containing company subfolders.
+
+#     Returns:
+#         Dict[str, str]: Mapping of company name to extracted text.
+#     """
+#     results = {}
+
+#     for sub in sorted(os.listdir(root_folder)):
+#         sub_path = os.path.join(root_folder, sub)
+#         if not os.path.isdir(sub_path):
+#             continue
+
+#         print(f"\nProcessing company: {sub}")
+#         framework_pdf, spo_pdf = find_framework_and_spo_pdfs(sub_path)
+#         if not framework_pdf or not spo_pdf:
+#             print("  ⚠️ Missing framework or SPO PDF. Skipping.")
+#             continue
+
+#         merged_tmp_path = write_temp_merged_pdf(framework_pdf, spo_pdf)
+#         if merged_tmp_path is None:
+#             print("  ⚠️ No table pages found; skipping this company.")
+#             continue
+
+#         try:
+#             extracted_text = call_whisperer_and_get_text(merged_tmp_path)
+#             results[sub] = extracted_text
+#             print(f"✅ Extracted text for {sub}")
+#         finally:
+#             if os.path.exists(merged_tmp_path):
+#                 os.remove(merged_tmp_path)
+#                 print("    Temporary merged PDF deleted.")
+
+#     return results
+
 def process_subfolders_in_memory(root_folder):
     """
-    Process all company subfolders in memory:
-    - Find framework and SPO PDFs
-    - Extract table pages
-    - Merge pages into temporary PDF
-    - Send to LLM Whisperer
-    - Return extracted text per company
+    Process company subfolders sequentially (memory-efficient version):
+    - Finds framework and SPO PDFs in each subfolder.
+    - Extracts table pages and merges into a temporary PDF.
+    - Sends the merged PDF to LLM Whisperer for text extraction.
+    - Yields company name and extracted text one by one.
 
     Args:
         root_folder (str): Path to the root folder containing company subfolders.
 
-    Returns:
-        Dict[str, str]: Mapping of company name to extracted text.
+    Yields:
+        Tuple[str, str]: (company_name, extracted_text)
     """
-    results = {}
 
     for sub in sorted(os.listdir(root_folder)):
         sub_path = os.path.join(root_folder, sub)
@@ -229,11 +287,13 @@ def process_subfolders_in_memory(root_folder):
 
         try:
             extracted_text = call_whisperer_and_get_text(merged_tmp_path)
-            results[sub] = extracted_text
             print(f"✅ Extracted text for {sub}")
+            yield sub, extracted_text  # <-- yields one company at a time
+
+        except Exception as e:
+            print(f"❌ Error extracting text for {sub}: {e}")
+
         finally:
             if os.path.exists(merged_tmp_path):
                 os.remove(merged_tmp_path)
                 print("    Temporary merged PDF deleted.")
-
-    return results

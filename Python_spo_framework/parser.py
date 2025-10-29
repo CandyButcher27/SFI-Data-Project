@@ -22,6 +22,7 @@ from typing import List, Dict, Any
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from groq import Groq
+from openai import OpenAI
 
 from google import genai
 from google.genai import types
@@ -316,11 +317,11 @@ def call_openai(model: str, messages: List[Dict], temperature: float = 0.0, max_
     if not api_key:
         raise EnvironmentError("OPENAI_API_KEY not set in environment.")
     
-    openai.api_key = api_key
+    client = OpenAI(api_key=api_key)
 
     for attempt in range(1, max_retries + 1):
         try:
-            response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model=model,
                 messages=messages,
                 temperature=temperature

@@ -32,7 +32,7 @@ from parser import parse_with_llm_openai #for OpenAI
 from writer import write_to_excel   
 
 from table_extractor import process_subfolders_in_memory
-from table_parser import parser_for_table
+from table_parser import parser_for_table #Currently Using OpenAI Parsing
 from table_writer import writer_to_excel_table
 
 from config import EXCEL_FILE, MAIN_FOLDER, GROQ_MODEL, GEMINI_MODEL, OPENAI_MODEL
@@ -108,13 +108,13 @@ def main():
         chunks = extract_chunks_from_two_pdfs(framework, spo,chunk_size=CHUNK_SIZE, overlap=OVERLAP,folder_name=sub)
 
         #Use this if you want to use Groq model
-        results = parse_with_llm_groq(chunks, PROMPTS_FILE, groq_model=GROQ_MODEL, top_k=TOP_K)
+        #results = parse_with_llm_groq(chunks, PROMPTS_FILE, groq_model=GROQ_MODEL, top_k=TOP_K)
         
         #Use this if you want to use OpenAI model
         results = parse_with_llm_openai(chunks, PROMPTS_FILE, openai_model= OPENAI_MODEL, top_k = TOP_K)
 
-        # Use this if you want to use Gemini model
-        results = parse_with_llm_gemini(chunks,PROMPTS_FILE,gemini_model=GEMINI_MODEL,top_k=TOP_K)
+        # # Use this if you want to use Gemini model
+        # results = parse_with_llm_gemini(chunks,PROMPTS_FILE,gemini_model=GEMINI_MODEL,top_k=TOP_K)
 
         # Write each result immediately into Excel
         for r in results:
@@ -124,21 +124,40 @@ def main():
                 write_to_excel(json_result, run_for=run_for)
                 
 
+# def main_table():
+#     """
+#     Run the tabular data pipeline for all subfolders in MAIN_FOLDER.
+
+#     Workflow:
+#     1. Extract tables from PDFs using table_extractor.
+#     2. Parse tables using table_parser.
+#     3. Write parsed tabular data to Excel using table_writer.
+#     """
+    
+#     results = process_subfolders_in_memory(MAIN_FOLDER)
+#     for company, text in results.items():
+#         parsed_dict = parser_for_table(text ,PROMPTS_TABLE)            
+#         writer_to_excel_table(parsed_dict , EXCEL_FILE)
+    
 def main_table():
     """
-    Run the tabular data pipeline for all subfolders in MAIN_FOLDER.
+    Run the tabular data pipeline sequentially for each subfolder in MAIN_FOLDER.
 
     Workflow:
-    1. Extract tables from PDFs using table_extractor.
+    1. Extract tables (via process_subfolders_in_memory, now yields results per company).
     2. Parse tables using table_parser.
-    3. Write parsed tabular data to Excel using table_writer.
+    3. Write parsed data into Excel via table_writer.
     """
-    
-    results = process_subfolders_in_memory(MAIN_FOLDER)
-    for company, text in results.items():
-        parsed_dict = parser_for_table(text ,PROMPTS_TABLE)            
-        writer_to_excel_table(parsed_dict , EXCEL_FILE)
-    
+
+    for company, text in process_subfolders_in_memory(MAIN_FOLDER):
+        try:
+            parsed_dict = parser_for_table(text, PROMPTS_TABLE)
+            writer_to_excel_table(parsed_dict, EXCEL_FILE)
+            print(f"✅ Completed pipeline for {company}\n")
+        except Exception as e:
+            print(f"❌ Error processing {company}: {e}")
+            continue
+
 
 if __name__ == "__main__":
     start_time = time.time()    

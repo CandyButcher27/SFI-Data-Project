@@ -6,15 +6,14 @@ model names, and parameters for text chunking and retrieval.
 """
 
 # Path to the Excel file where data is stored
-EXCEL_FILE = "Framewrok and SPO Output.xlsx"
-
+EXCEL_FILE = "Final_output.xlsx"
 # Folder containing all main framework files
 MAIN_FOLDER = "Main_spo_framework"
 
 # LLM model names
 GROQ_MODEL = "llama-3.3-70b-versatile"
 GEMINI_MODEL = "gemini-2.5-flash"
-OPENAI_MODEL = "gpt-5"
+OPENAI_MODEL = "gpt-4.1-mini"
 
 #Contains the Prompts FIle
 PROMPTS_FILE = "Prompts/prompts_spo_framework.json"
