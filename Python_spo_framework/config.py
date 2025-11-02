@@ -6,7 +6,7 @@ model names, and parameters for text chunking and retrieval.
 """
 
 # Path to the Excel file where data is stored
-EXCEL_FILE = "Final_output.xlsx"
+EXCEL_FILE = "Output.xlsx"
 # Folder containing all main framework files
 MAIN_FOLDER = "Main_spo_framework"
 

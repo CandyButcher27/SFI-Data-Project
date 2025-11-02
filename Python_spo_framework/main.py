@@ -123,21 +123,6 @@ def main():
             if run_for and isinstance(json_result, dict):
                 write_to_excel(json_result, run_for=run_for)
                 
-
-# def main_table():
-#     """
-#     Run the tabular data pipeline for all subfolders in MAIN_FOLDER.
-
-#     Workflow:
-#     1. Extract tables from PDFs using table_extractor.
-#     2. Parse tables using table_parser.
-#     3. Write parsed tabular data to Excel using table_writer.
-#     """
-    
-#     results = process_subfolders_in_memory(MAIN_FOLDER)
-#     for company, text in results.items():
-#         parsed_dict = parser_for_table(text ,PROMPTS_TABLE)            
-#         writer_to_excel_table(parsed_dict , EXCEL_FILE)
     
 def main_table():
     """
