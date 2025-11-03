@@ -164,3 +164,8 @@ The project documentation is generated using Doxygen.
   - Only `docs/html` is needed for the web version.  
   - The LaTeX/PDF output (`docs/latex`) is one-time and ignored in Git.
 
+# US-Based Region
+WHISPERER_BASE = "https://llmwhisperer-api.us-central.unstract.com/api/v2"
+
+# EU-Based Region
+WHISPERER_BASE = "https://llmwhisperer-api.eu-west.unstract.com/api/v2"
