@@ -89,9 +89,7 @@ def write_to_excel(json_data: Dict, run_for: str) -> None:
     wb = _init_workbook()
     ws1 = wb["Framework Overview"]
 
-    # -------------------------
-    # Determine Framework ID
-    # -------------------------
+    
     if run_for == "framework":
         # New framework, generate next ID
         framework_id = _get_next_framework_id(ws1)
@@ -101,9 +99,7 @@ def write_to_excel(json_data: Dict, run_for: str) -> None:
             raise ValueError("No framework entry exists yet. Add a framework first.")
         framework_id = ws1.cell(row=ws1.max_row, column=1).value
 
-    # -------------------------
-    # Write Framework Data
-    # -------------------------
+  
     if run_for == "framework":
         # Framework Overview
         ws1.append([
@@ -126,9 +122,7 @@ def write_to_excel(json_data: Dict, run_for: str) -> None:
             json_data.get("External Verification", "")
         ])
 
-    # -------------------------
-    # Write SPO Data
-    # -------------------------
+    
     elif run_for == "spo":
         # Update the last framework row in Framework Overview
         last_row = ws1.max_row

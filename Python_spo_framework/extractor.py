@@ -18,7 +18,7 @@ Functions:
 """
 
 import pdfplumber
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 def extract_text_from_pdf(path: str) -> List[str]:
     """
@@ -66,9 +66,9 @@ def chunk_text(text: str, chunk_size: int = 2000, overlap: int = 200) -> List[st
 def extract_chunks_from_two_pdfs(
     framework_pdf: str,
     spo_pdf: str,
-    chunk_size: int = 500,
+    chunk_size: int = 2000,
     overlap: int = 200,
-    folder_name: str = None
+    folder_name: Optional[str] = None
 ) -> List[Dict]:
     """
     Extract text from two PDFs (framework and SPO), chunk each page, and return structured chunks.

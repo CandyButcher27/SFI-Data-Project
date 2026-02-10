@@ -242,11 +242,11 @@ def process_subfolders_in_memory(root_folder):
 
         try:
             extracted_text = call_whisperer_and_get_text(merged_tmp_path)
-            print(f"✅ Extracted text for {sub}")
+            print(f" Extracted text for {sub}")
             yield sub, extracted_text  # <-- yields one company at a time
 
         except Exception as e:
-            print(f"❌ Error extracting text for {sub}: {e}")
+            print(f" Error extracting text for {sub}: {e}")
 
         finally:
             if os.path.exists(merged_tmp_path):

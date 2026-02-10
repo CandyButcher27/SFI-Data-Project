@@ -108,10 +108,10 @@ def main():
         chunks = extract_chunks_from_two_pdfs(framework, spo,chunk_size=CHUNK_SIZE, overlap=OVERLAP,folder_name=sub)
 
         #Use this if you want to use Groq model
-        #results = parse_with_llm_groq(chunks, PROMPTS_FILE, groq_model=GROQ_MODEL, top_k=TOP_K)
+        results = parse_with_llm_groq(chunks, PROMPTS_FILE, groq_model=GROQ_MODEL, top_k=TOP_K)
         
         #Use this if you want to use OpenAI model
-        results = parse_with_llm_openai(chunks, PROMPTS_FILE, openai_model= OPENAI_MODEL, top_k = TOP_K)
+        # results = parse_with_llm_openai(chunks, PROMPTS_FILE, openai_model= OPENAI_MODEL, top_k = TOP_K)
 
         # # Use this if you want to use Gemini model
         # results = parse_with_llm_gemini(chunks,PROMPTS_FILE,gemini_model=GEMINI_MODEL,top_k=TOP_K)
@@ -138,9 +138,9 @@ def main_table():
         try:
             parsed_dict = parser_for_table(text, PROMPTS_TABLE)
             writer_to_excel_table(parsed_dict, EXCEL_FILE)
-            print(f"✅ Completed pipeline for {company}\n")
+            print(f" Completed pipeline for {company}\n")
         except Exception as e:
-            print(f"❌ Error processing {company}: {e}")
+            print(f"Error processing {company}: {e}")
             continue
 
 

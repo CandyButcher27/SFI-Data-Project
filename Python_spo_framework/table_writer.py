@@ -155,9 +155,7 @@ from openpyxl import Workbook, load_workbook
 from typing import Dict
 
 
-# -------------------------------------------------------------------
-# 🧱 STEP 1: Initialize workbook and headers
-# -------------------------------------------------------------------
+
 def _init_workbook(EXCEL_FILE: str) -> Workbook:
     """
     Create the Excel workbook with required sheets and headers if missing.
@@ -218,9 +216,7 @@ def _init_workbook(EXCEL_FILE: str) -> Workbook:
     return wb
 
 
-# -------------------------------------------------------------------
-# 🧮 STEP 2: Generate next Framework ID
-# -------------------------------------------------------------------
+
 def _get_next_framework_id(ws) -> str:
     """
     Generate the next Framework ID based on the last entry in the worksheet.
@@ -237,9 +233,7 @@ def _get_next_framework_id(ws) -> str:
     return f"F{number + 1:03d}"
 
 
-# -------------------------------------------------------------------
-# ✍️ STEP 3: Main writer function
-# -------------------------------------------------------------------
+
 def writer_to_excel_table(answer: Dict, EXCEL_FILE: str):
     """
     Writes structured data from parsed JSON into an Excel file.
@@ -294,9 +288,7 @@ def writer_to_excel_table(answer: Dict, EXCEL_FILE: str):
     df_elig = pd.DataFrame(eligibility_rows)
     df_sdg = pd.DataFrame(sdg_rows)
 
-    # -------------------------------------------------------------------
-    # 📘 Append to Excel safely using pandas
-    # -------------------------------------------------------------------
+  
     with pd.ExcelWriter(EXCEL_FILE, mode="a", engine="openpyxl", if_sheet_exists="overlay") as writer:
         # Eligibility+EU Tax sheet
         existing_elig = pd.read_excel(EXCEL_FILE, sheet_name=sheet_elig)

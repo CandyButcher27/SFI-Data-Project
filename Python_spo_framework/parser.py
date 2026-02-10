@@ -16,7 +16,6 @@ import json
 import numpy as np
 import time
 import re
-import openai
 
 from typing import List, Dict, Any
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -31,7 +30,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-# ---------------- TF-IDF Retrieval ---------------- #
+# TF-IDF Retrieval 
 
 def build_tfidf_index(chunks: List[Dict]) -> Dict:
     """
@@ -92,7 +91,7 @@ def assemble_context(chunks: List[Dict], top_indices: List[int]) -> str:
     return "\n\n---\n\n".join(parts)
 
 
-# ---------------- Groq Parsing ---------------- #
+# Groq Parsing
 
 def call_groq(model: str, messages: List[Dict], temperature: float = 0.0, max_retries: int = 3) -> Dict:
     """
@@ -196,8 +195,7 @@ def parse_with_llm_groq(chunks: List[Dict], prompts_path: str, groq_model: str, 
     return results
 
 
-# ---------------- Gemini Parsing ---------------- #
-
+#  Gemini Parsing
 def call_gemini(model_gemini: str, messages: List[Dict], temperature: float = 0.0, max_retries: int = 3) -> Dict:
     """
     Call Gemini chat model with retries.
@@ -298,7 +296,7 @@ def parse_with_llm_gemini(chunks: List[Dict], prompts_path: str, gemini_model: s
 
     return results
 
-# ---------------- OpenAI Parsing ---------------- #
+#  OpenAI Parsing 
 
 def call_openai(model: str, messages: List[Dict], temperature: float = 0.0, max_retries: int = 3) -> Dict:
     """

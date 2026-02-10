@@ -26,7 +26,7 @@ load_dotenv()
 
 
 
-# ---------------- TF-IDF Retrieval ---------------- #
+# TF-IDF Retrieval 
 
 def build_tfidf_index(chunks: List[Dict]) -> Dict:
     """Return vectorizer and matrix for search, plus the chunk texts."""
@@ -59,7 +59,7 @@ def assemble_context(chunks: List[Dict], top_indices: List[int]) -> str:
     return "\n\n---\n\n".join(parts)
 
 
-# ---------------- Groq API ---------------- #
+#  Groq API 
 
 def call_groq(model: str, messages: List[Dict], temperature: float = 0.0, max_retries: int = 3) -> Dict:
     api_key = os.getenv("GROQ_API_KEY")
@@ -83,7 +83,7 @@ def call_groq(model: str, messages: List[Dict], temperature: float = 0.0, max_re
             time.sleep(1.0 * attempt)
 
 
-# ---------------- Core Parsing Logic ---------------- #
+# Core Parsing Logic 
 
 def parse_with_llm(chunks: List[Dict],prompts_path: str,groq_model: str ,top_k: int = 5) -> List[Dict]:
     """
@@ -105,7 +105,7 @@ def parse_with_llm(chunks: List[Dict],prompts_path: str,groq_model: str ,top_k: 
         # Filter chunks based on run_for
         if run_for == "termsheet":
             relevant_chunks = [c for c in chunks if c.get("source") == "termsheet"]
-        else:  # "both" or missing
+        else:  
             relevant_chunks = chunks
 
         # build TF-IDF index for the filtered set
@@ -142,7 +142,7 @@ def parse_with_llm(chunks: List[Dict],prompts_path: str,groq_model: str ,top_k: 
         except Exception:
             content = str(resp)
 
-        # try parsing JSON
+      
         try:
             parsed = json.loads(content)
         except Exception:
@@ -165,7 +165,7 @@ def parse_with_llm(chunks: List[Dict],prompts_path: str,groq_model: str ,top_k: 
 
     return results
 
-#Gemini Parsing
+
 
 def parse_with_llm_gemini(chunks: List[Dict],prompts_path: str,gemini_model: str,top_k: int = 5) -> List[Dict]:
     """
@@ -221,14 +221,14 @@ def parse_with_llm_gemini(chunks: List[Dict],prompts_path: str,gemini_model: str
                            messages=[system_msg, user_msg],
                            temperature=0.0)
         
-        # print(resp.usage_metadata)
+        
 
         try:
             content = resp.text
         except Exception:
             content = str(resp)
 
-        # try parsing JSON
+       
         try:
             parsed = json.loads(content)
         except Exception:
@@ -266,23 +266,17 @@ def call_gemini(model_gemini: str,
     if not api_key:
         raise EnvironmentError("GEMINI_API_KEY not set in environment.")
 
-    client = genai.Client(api_key="AIzaSyCm-rJFNthlu0uA9b0K8_Bes7RS_6Q4KEI")
+    client = genai.Client(api_key="")
 
     for attempt in range(1, max_retries + 1):
         try:
-            # Gemini doesn’t use role-based messages directly like OpenAI.
-            # We'll stitch them together into a prompt string.
+           
             prompt = ""
             for m in messages:
                 role = m["role"].upper()
                 prompt += f"{role}: {m['content']}\n\n"
 
-            # model_client = genai.GenerativeModel(model)
-            # response = model_client.generate_content(
-            #     prompt,
-            #     generation_config={"temperature": temperature}
-            # )
-            # return response
+           
 
             user_messages = [m["content"] for m in messages if m["role"] == "user"]
             system_messages = [m["content"] for m in messages if m["role"] == "system"]
