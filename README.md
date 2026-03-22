@@ -1,171 +1,148 @@
 # SFI Data Information Extractor
 
-A comprehensive pipeline for extracting, parsing, and structuring textual and tabular data from corporate PDFs, including SPO (Second Party Opinion) reports, frameworks, and term sheets. The project outputs a ready-to-use Excel sheet for further analysis.
+An LLM-powered document intelligence pipeline built during an internship at SFI Data. The system processes corporate financial PDFs — Second Party Opinion (SPO) reports, sustainability frameworks, and term sheets — and outputs structured, analysis-ready Excel files.
+
+---
+
+## Problem Context
+
+Financial analysts at SFI Data spent significant manual effort reading dense, inconsistently formatted corporate PDFs to extract a standard set of data fields. The documents were long (50–200+ pages), varied in layout, and contained both free-form narrative and embedded tables — neither of which existing PDF parsers handled well together.
+
+This pipeline automates both extraction pathways and reduces document processing to a single command.
+
+---
+
+## System Architecture
+
+The pipeline is split into two parallel tracks depending on data type:
+
+### Track 1 — Textual Data Pipeline
+
+```
+PDF(s)
+  │
+  ▼
+extractor.py       ← PyPDF2-based text extraction per page
+  │
+  ▼
+parser.py          ← Chunks text → builds vector DB → retrieves relevant chunks
+  │                   per field → queries LLM with structured JSON prompt
+  ▼
+writer.py          ← Parses LLM JSON output → writes to Excel via openpyxl
+  │
+  ▼
+output.xlsx
+```
+
+### Track 2 — Tabular Data Pipeline
+
+```
+PDF(s)
+  │
+  ▼
+table_extractor.py  ← LLMWhisperer API extracts tables with layout preservation
+  │
+  ▼
+table_parser.py     ← Full table passed as context (no chunking — avoids
+  │                    row/column boundary loss) → LLM extracts structured data
+  ▼
+table_writer.py     ← Writes structured output to Excel
+  │
+  ▼
+output.xlsx
+```
+
+**Why different chunking strategies for text vs. tables?**
+Text fields are long and diffuse — chunking + vector retrieval focuses the LLM on the relevant passage without exceeding context limits. Tables are short but spatially structured: chunking destroys row-column relationships. For tables, the entire extracted content is passed as a single context block.
+
+---
+
+## LLM Integration
+
+Prompts are stored as structured JSON files in `Prompts/`, not hardcoded. This decouples field definitions from pipeline logic, making it straightforward to add new extraction targets without modifying code.
+
+The system is provider-agnostic by design — it supports OpenAI, Gemini, and Groq interchangeably. This was intentional: different document types performed differently across providers during testing, and the internship scope required flexibility to swap without refactoring.
+
+Prompts instruct the model to return only valid JSON with no preamble, which is then parsed and validated before writing to Excel. Malformed responses are caught and logged rather than silently written.
+
+---
+
+## Document Types Supported
+
+| Type | Input | Prompt File |
+|---|---|---|
+| SPO + Framework | Two PDFs per company subfolder | `Prompts/prompts_spo_framework.json` |
+| Term Sheets | One PDF per entry | `Prompts/prompts_term_sheet/` |
+
+---
+
+## Setup
+
+```bash
+git clone https://github.com/CandyButcher27/SFI-Data-Project.git
+cd SFI-Data-Project
+python -m venv venv
+source venv/bin/activate          # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Set API keys:
+```bash
+export LLMWHISPERER_API_KEY='...'
+export OPENAI_API_KEY='...'       # or GEMINI_API_KEY / GROQ_API_KEY
+```
+
+Run:
+```bash
+# SPO + Framework pipeline
+cd Python_spo_framework && python main.py
+
+# Term Sheet pipeline
+cd Python_term_sheet && python main.py
+```
+
+Output: structured `.xlsx` files with one row per company/document.
+
+---
+
+## Configuration Notes
+
+- LLMWhisperer endpoint is region-configurable (US: `us-central`, EU: `eu-west`)
+- Each company's documents go in a subfolder under `Main_spo_framework/` — framework PDF first, SPO PDF second
+- Prompts are the primary configuration surface — no code changes needed to add new fields
+
+---
+
+## Documentation
+
+Full API documentation generated with Doxygen. View locally:
+
+```
+docs/html - Python_spo_framework/index.html
+docs/html - Python_term_sheet/index.html
+```
+
+Regenerate:
+```bash
+cd Python_spo_framework && doxygen Doxyfile
+```
 
 ---
 
 ## Project Structure
 
-### Main Folders
-
-- **Main_spo_framework/**: Contains subfolders for each company.  
-  Each subfolder should contain **exactly two PDF files**:
-  - Framework PDF
-  - Second Party Opinion PDF  
-
-  PDFs can be in any order, but the preferred order is framework first, SPO second.
-
-- **Main_term_sheet/**: Contains PDFs for term sheets. The structure is similar to SPO framework PDFs.
-
-### Code Pipelines
-
-The project consists of **two main pipelines**:
-
-#### 1. Textual Data Pipeline
-
-- **Files**:
-  - `extractor.py`: Extracts textual data from PDFs using Python built-in libraries.
-  - `parser.py`: Breaks text into chunks, builds a vector database, and parses using a Large Language Model (LLM) via API key.
-  - `writer.py`: Structures the LLM output and writes it to an Excel sheet.
-  - `main.py`: Orchestrates the textual pipeline by calling all functions sequentially.
-  
-- **Prompts**: Stored in `Prompts/prompts_spo_framework.json`. They guide the LLM in extracting structured JSON output.
-
-- **Workflow**:
-  1. Read all PDFs from `Main_spo_framework`.
-  2. Extract textual data for all subfolders.
-  3. Parse textual data using LLM.
-  4. Write structured output to Excel.
-
-#### 2. Tabular Data Pipeline
-
-- **Files**:
-  - `table_extractor.py`: Extracts tables from PDFs using LLMWhisperer.
-  - `table_parser.py`: Uses LLM to process tables as context (no chunking to avoid data loss).
-  - `table_writer.py`: Writes structured tabular output to Excel.
-  - `main.py`: Calls functions for the tabular pipeline.
-  
-- **Prompts**: Stored in `Prompts/prompts_table.json`.
-
-- **Workflow**:
-  1. Extract tables for all PDFs.
-  2. Parse the table data using LLM.
-  3. Write the entire structured output to Excel.
-
-**Note**: Unlike textual data, for tabular data the entire dataset is extracted first and then written.
+```
+SFI-Data-Project/
+├── Python_spo_framework/    # Textual + tabular pipeline for SPO/framework docs
+├── Python_term_sheet/       # Pipeline variant for term sheets
+├── Main_spo_framework/      # Input PDFs (per-company subfolders)
+├── Main_term_sheet/         # Input PDFs for term sheets
+├── Prompts/                 # JSON prompt definitions (field extraction targets)
+└── requirements.txt
+```
 
 ---
 
-## Term Sheets
+## Built During
 
-- Works similarly to the SPO and framework pipeline.
-- Prompts are located in `Prompts/prompts_term_sheet/`.
-- Main script: `Python_term_sheet/main.py`.
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.10+
-- Virtual environment (recommended)
-- API Keys: (depending on what to work with)
-  - `LLMWhisperer API Key`
-  - `OpenAI API Key`
-  - `Gemini API Key`
-  - `Groq API Key`
-
-  
----
-
-### Installation & Quick Start
-
-1. **Clone the repository**:
-
-```bash
-git clone https://github.com/CandyButcher27/SFI-Data-Project.git
-cd SFI-Data-Project
-```
-### 2. **Create a Virtual Envoirnemnt** :
-
-```bash
-# Windows
-python -m venv venv
-
-# Mac/Linux
-python3 -m venv venv
-```
-### 3. **Activate the Virtual Envoirnment**
-```bash
-# Windows
-venv\Scripts\activate
-
-# Mac/Linux
-source venv/bin/activate
-```
-### 4. **Install dependencies**
-```bash
-pip install -r requirements.txt
-```
-### 5. **Set Environment Variables**
-```bash
-# ---------------- Mac / Linux ----------------
-export LLMWHISPERER_API_KEY='your_api_key'
-export OPENAI_API_KEY='your_api_key'
-export GEMINI_API_KEY='your_api_key'
-export GROQ_API_KEY='your_api_key'
-
-# ---------------- Windows (CMD) ----------------
-set LLMWHISPERER_API_KEY='your_api_key'
-set OPENAI_API_KEY='your_api_key'
-set GEMINI_API_KEY='your_api_key'
-set GROQ_API_KEY='your_api_key'
-
-# ---------------- Windows (PowerShell) ----------------
-$env:LLMWHISPERER_API_KEY='your_api_key'
-$env:OPENAI_API_KEY='your_api_key'
-$env:GEMINI_API_KEY='your_api_key'
-$env:GROQ_API_KEY='your_api_key'
-```
-### 6. **Run the PipeLine**
-```bash
-#SPO and Framework
-cd Python_spo_framework
-python main.py
-
-#Term Sheets
-cd Python_term_sheet
-python main.py
-```
-
-### Output :  Excel sheets containing structured textual and tabular data.
-
-### Documentation
-
-The project documentation is generated using Doxygen.
-
-**Web version:**
-1. Can view `index.html` present inside `docs/html - Python_spo_framework`
-2. Can view `index.html` present inside `docs/html - Python_term_sheet`
-
-  
-- **To regenerate documentation locally:**  
-  1. Make sure Doxygen is installed.  
-  2. Navigate to the project folder in terminal:
-     ```bash
-     cd Python_spo_framework
-     ```
-  3. Run:
-     ```bash
-     doxygen Doxyfile
-     ```
-- **Notes:**  
-  - Only `docs/html` is needed for the web version.  
-  - The LaTeX/PDF output (`docs/latex`) is one-time and ignored in Git.
-
-# US-Based Region
-WHISPERER_BASE = "https://llmwhisperer-api.us-central.unstract.com/api/v2"
-
-# EU-Based Region
-WHISPERER_BASE = "https://llmwhisperer-api.eu-west.unstract.com/api/v2"
+Internship at **SFI Data**
